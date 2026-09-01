@@ -235,7 +235,8 @@ export default async function decorate(block) {
       grouped.className = 'nav-lang-list';
       order.forEach((seg) => {
         const countryItem = document.createElement('li');
-        countryItem.className = 'nav-lang-country';
+        // country-code modifier class drives the flag background in CSS
+        countryItem.className = `nav-lang-country nav-lang-country-${seg}`;
         const heading = document.createElement('span');
         heading.className = 'nav-lang-country-title';
         heading.textContent = COUNTRY_NAMES[seg] || seg.toUpperCase();

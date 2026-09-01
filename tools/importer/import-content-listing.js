@@ -3,6 +3,8 @@
 
 // PARSER IMPORTS
 import cardsTeamParser from "./parsers/cards-team.js";
+import columnsParser from "./parsers/columns.js";
+import cardsParser from "./parsers/cards.js";
 
 // TRANSFORMER IMPORTS
 import cleanupTransformer from "./transformers/wknd-cleanup.js";
@@ -11,6 +13,8 @@ import sectionsTransformer from "./transformers/wknd-sections.js";
 // PARSER REGISTRY
 const parsers = {
   "cards-team": cardsTeamParser,
+  "columns": columnsParser,
+  "cards": cardsParser,
 };
 
 // PAGE TEMPLATE CONFIGURATION (embedded from page-templates.json)
@@ -31,6 +35,20 @@ const PAGE_TEMPLATE = {
           ".xf-master-building-block",
           ".buildingblock.responsivegrid",
           "[class*=cmp-experiencefragment]"
+        ]
+      },
+      {
+        "name": "columns",
+        "instances": [
+          ".teaser.cmp-teaser--featured",
+          ".cmp-teaser--featured"
+        ]
+      },
+      {
+        "name": "cards",
+        "instances": [
+          ".cmp-image-list",
+          ".image-list.list"
         ]
       }
     ],
@@ -143,19 +161,9 @@ export default {
     WebImporter.rules.transformBackgroundImages(main, document);
     WebImporter.rules.adjustImageUrls(main, url, params.originalURL);
 
-    const rawPath = new URL(params.originalURL).pathname
-      .replace(/\/$/, "")
-      .replace(/\.html?$/, "");
+    const rawPath = new URL(params.originalURL).pathname.replace(/\/$/, "").replace(/\.html?$/, "");
     const path = WebImporter.FileUtils.sanitizePath(rawPath === "" ? "/index" : rawPath);
 
-    return [{
-      element: main,
-      path,
-      report: {
-        title: document.title,
-        template: PAGE_TEMPLATE.name,
-        blocks: pageBlocks.map((b) => b.name),
-      },
-    }];
+    return [{ element: main, path, report: { title: document.title, template: PAGE_TEMPLATE.name, blocks: pageBlocks.map((b) => b.name) } }];
   },
 };

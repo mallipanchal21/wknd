@@ -2,8 +2,12 @@
   "status": "success",
   "url": "https://wknd.site/ca/en/magazine.html",
   "path": "ca/en/magazine",
-  "timestamp": "2026-09-01T07:42:24.126Z",
+  "timestamp": "2026-09-01T10:41:20.002Z",
   "title": "Magazine",
   "template": "content-listing",
-  "blocks": []
+  "blocks": [
+    "columns",
+    "cards",
+    "cards"
+  ]
 }

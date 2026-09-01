@@ -84,6 +84,83 @@ var CustomImportScript = (() => {
     root.replaceWith(block);
   }
 
+  // tools/importer/parsers/columns.js
+  function parse2(element, { document: document2 }) {
+    const img = element.querySelector(".cmp-teaser__image img, img");
+    const pretitle = element.querySelector(".cmp-teaser__pretitle");
+    const title = element.querySelector(".cmp-teaser__title, h1, h2, h3");
+    const description = element.querySelector(".cmp-teaser__description");
+    const cta = element.querySelector(".cmp-teaser__action-link");
+    const textCell = [];
+    if (pretitle) {
+      const p = document2.createElement("p");
+      p.textContent = pretitle.textContent.trim();
+      textCell.push(p);
+    }
+    if (title) {
+      const h = document2.createElement("h2");
+      h.textContent = title.textContent.trim();
+      textCell.push(h);
+    }
+    if (description) {
+      const p = document2.createElement("p");
+      p.innerHTML = description.innerHTML;
+      textCell.push(p);
+    }
+    if (cta && cta.getAttribute("href")) {
+      const a = document2.createElement("a");
+      a.href = cta.getAttribute("href");
+      a.textContent = cta.textContent.trim();
+      textCell.push(a);
+    }
+    if (textCell.length === 0 && !img) {
+      element.replaceWith(...element.childNodes);
+      return;
+    }
+    const cells = [[textCell.length ? textCell : "", img || ""]];
+    const block = WebImporter.Blocks.createBlock(document2, { name: "columns", cells });
+    element.replaceWith(block);
+  }
+
+  // tools/importer/parsers/cards.js
+  function parse3(element, { document: document2 }) {
+    const items = Array.from(element.querySelectorAll(".cmp-image-list__item, li.cmp-image-list__item"));
+    const cells = [];
+    items.forEach((item) => {
+      const img = item.querySelector("img");
+      const titleLink = item.querySelector(".cmp-image-list__item-title-link");
+      const titleText = item.querySelector(".cmp-image-list__item-title");
+      const description = item.querySelector(".cmp-image-list__item-description");
+      const textCell = [];
+      if (titleText) {
+        const h = document2.createElement("h3");
+        const href = titleLink ? titleLink.getAttribute("href") : null;
+        if (href) {
+          const a = document2.createElement("a");
+          a.href = href;
+          a.textContent = titleText.textContent.trim();
+          h.appendChild(a);
+        } else {
+          h.textContent = titleText.textContent.trim();
+        }
+        textCell.push(h);
+      }
+      if (description) {
+        const p = document2.createElement("p");
+        p.textContent = description.textContent.trim();
+        textCell.push(p);
+      }
+      if (!img && textCell.length === 0) return;
+      cells.push([img || "", textCell.length ? textCell : ""]);
+    });
+    if (cells.length === 0) {
+      element.replaceWith(...element.childNodes);
+      return;
+    }
+    const block = WebImporter.Blocks.createBlock(document2, { name: "cards", cells });
+    element.replaceWith(block);
+  }
+
   // tools/importer/transformers/wknd-cleanup.js
   var TransformHook = {
     beforeTransform: "beforeTransform",
@@ -183,7 +260,9 @@ var CustomImportScript = (() => {
 
   // tools/importer/import-content-listing.js
   var parsers = {
-    "cards-team": parse
+    "cards-team": parse,
+    "columns": parse2,
+    "cards": parse3
   };
   var PAGE_TEMPLATE = {
     "name": "content-listing",
@@ -202,6 +281,20 @@ var CustomImportScript = (() => {
           ".xf-master-building-block",
           ".buildingblock.responsivegrid",
           "[class*=cmp-experiencefragment]"
+        ]
+      },
+      {
+        "name": "columns",
+        "instances": [
+          ".teaser.cmp-teaser--featured",
+          ".cmp-teaser--featured"
+        ]
+      },
+      {
+        "name": "cards",
+        "instances": [
+          ".cmp-image-list",
+          ".image-list.list"
         ]
       }
     ],
@@ -310,15 +403,7 @@ var CustomImportScript = (() => {
       WebImporter.rules.adjustImageUrls(main, url, params.originalURL);
       const rawPath = new URL(params.originalURL).pathname.replace(/\/$/, "").replace(/\.html?$/, "");
       const path = WebImporter.FileUtils.sanitizePath(rawPath === "" ? "/index" : rawPath);
-      return [{
-        element: main,
-        path,
-        report: {
-          title: document2.title,
-          template: PAGE_TEMPLATE.name,
-          blocks: pageBlocks.map((b) => b.name)
-        }
-      }];
+      return [{ element: main, path, report: { title: document2.title, template: PAGE_TEMPLATE.name, blocks: pageBlocks.map((b) => b.name) } }];
     }
   };
   return __toCommonJS(import_content_listing_exports);

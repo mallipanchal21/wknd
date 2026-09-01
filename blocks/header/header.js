@@ -209,12 +209,48 @@ export default async function decorate(block) {
     langWrapper.append(langToggle);
 
     if (langList) {
-      langList.classList.add('nav-lang-list');
-      // mark the active locale
-      langList.querySelectorAll('a').forEach((a) => {
+      // Re-group the flat locale list by country (matching wknd.site), keyed by
+      // the country segment of each href (/us/, /ca/, /ch/, ...). Renders a
+      // country heading followed by its language links.
+      const COUNTRY_NAMES = {
+        us: 'United States',
+        ca: 'Canada',
+        ch: 'Switzerland',
+        de: 'Germany',
+        fr: 'France',
+        es: 'Spain',
+        it: 'Italy',
+      };
+      const links = [...langList.querySelectorAll('a')];
+      const order = [];
+      const byCountry = new Map();
+      links.forEach((a) => {
+        const seg = new URL(a.href, window.location).pathname.replace(/^\//, '').split('/')[0];
+        if (!byCountry.has(seg)) { byCountry.set(seg, []); order.push(seg); }
+        byCountry.get(seg).push(a);
         if (a.textContent.trim() === currentLabel) a.setAttribute('aria-current', 'true');
       });
-      langWrapper.append(langList);
+
+      const grouped = document.createElement('ul');
+      grouped.className = 'nav-lang-list';
+      order.forEach((seg) => {
+        const countryItem = document.createElement('li');
+        countryItem.className = 'nav-lang-country';
+        const heading = document.createElement('span');
+        heading.className = 'nav-lang-country-title';
+        heading.textContent = COUNTRY_NAMES[seg] || seg.toUpperCase();
+        const sub = document.createElement('ul');
+        byCountry.get(seg).forEach((a) => {
+          const li = document.createElement('li');
+          li.append(a);
+          sub.append(li);
+        });
+        countryItem.append(heading, sub);
+        grouped.append(countryItem);
+      });
+
+      langList.replaceWith(grouped);
+      langWrapper.append(grouped);
       langToggle.addEventListener('click', () => {
         const open = langToggle.getAttribute('aria-expanded') === 'true';
         langToggle.setAttribute('aria-expanded', open ? 'false' : 'true');

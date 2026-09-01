@@ -109,16 +109,17 @@ function buildBreadcrumbsAutoBlock(main) {
     return;
   }
 
-  // 2) fallback: synthesise from the URL path on known sections — both the
-  //    section landing page (e.g. /adventures → "Adventures") and its detail
-  //    pages (e.g. /adventures/bali-surf-camp → "Adventures > Bali Surf Camp").
+  // 2) fallback: synthesise from the URL path on known sections — only for
+  //    detail pages (e.g. /adventures/bali-surf-camp → "Adventures > Bali Surf
+  //    Camp"). The section landing pages themselves (/adventures, /magazine) do
+  //    NOT get a breadcrumb — a single-item trail there is redundant.
   const parts = window.location.pathname.replace(/\.html$/, '').replace(/\/$/, '').split('/').filter(Boolean);
   let segments = parts;
   if (segments.length >= 2 && /^[a-z]{2}$/.test(segments[0]) && /^[a-z]{2}$/.test(segments[1])) {
     segments = segments.slice(2);
   }
   const sections = ['adventures', 'magazine'];
-  if (segments.length < 1 || !sections.includes(segments[0])) return;
+  if (segments.length < 2 || !sections.includes(segments[0])) return;
   const section = firstDiv || main;
   const block = buildBlock('breadcrumbs', { elems: [] });
   section.prepend(block);

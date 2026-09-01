@@ -1,0 +1,22 @@
+{
+  "variantName": "cards",
+  "baseBlock": "cards",
+  "version": "1.0.0",
+  "created": "2026-09-01T00:00:00.000Z",
+  "visualCharacteristics": {
+    "colorScheme": "light",
+    "density": "default",
+    "purpose": "listing",
+    "imagePattern": "thumbnail"
+  },
+  "contentPattern": {
+    "structure": "repeating cards, each with an image cell and a body cell (title + description + optional CTA)",
+    "buttonCount": 0,
+    "imageCount": 2
+  },
+  "usage": {
+    "pagesUsing": ["/us/en", "/us/en/adventures", "/us/en/magazine"],
+    "reuseCount": 3,
+    "lastUsed": "2026-09-01T00:00:00.000Z"
+  }
+}

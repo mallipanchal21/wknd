@@ -1,0 +1,22 @@
+{
+  "variantName": "fragment",
+  "baseBlock": "fragment",
+  "version": "1.0.0",
+  "created": "2026-09-01T00:00:00.000Z",
+  "visualCharacteristics": {
+    "colorScheme": "light",
+    "density": "default",
+    "purpose": "content-reuse",
+    "imagePattern": "noimg"
+  },
+  "contentPattern": {
+    "structure": "single cell holding a link to a fragment document path; the referenced fragment content is loaded inline",
+    "buttonCount": 0,
+    "imageCount": 0
+  },
+  "usage": {
+    "pagesUsing": [],
+    "reuseCount": 0,
+    "lastUsed": "2026-09-01T00:00:00.000Z"
+  }
+}

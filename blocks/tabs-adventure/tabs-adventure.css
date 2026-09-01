@@ -93,16 +93,19 @@
    applied to the block itself so BOTH the tab list and the panel align to the
    same left edge (matches wknd.site: sidebar 291px + ~28px gutter). --- */
 @media (width >= 900px) {
+  /* Wrapper keeps the SAME content-column geometry as the footer and every
+     other section (max-width 1200, centered, 32px side padding) so the tabs'
+     right edge lines up with the footer/H1 right gutter at all widths. */
   main > .section.tabs-adventure-container > div {
     box-sizing: border-box;
     max-width: 1200px;
     margin: 0 auto;
-    padding: 0;
+    padding: 0 32px;
   }
 
-  /* Inset the tabs past the floated 291px sidebar + ~28px gutter so both the
+  /* Inset the block past the floated 291px sidebar + ~28px gutter so both the
      tab list and the panel share one left edge, while the block still spans to
-     the content-column right edge (aligning with the H1 above). */
+     the shared right gutter (aligning with the H1 / footer above). */
   main > .section.tabs-adventure-container .tabs-adventure {
     padding-left: 319px;
   }

@@ -55,10 +55,19 @@
    live in separate full-width EDS sections, so we float the metadata section
    and inset the tabs section (see tabs-adventure.css). --- */
 @media (width >= 900px) {
+  /* Contain the floated sidebar within <main> so a short tab panel (e.g. the
+     "What to Bring" tab) can't leave the tall metadata float sticking out and
+     overlapping the footer. Scoped via :has() to only the adventure-detail
+     main that actually holds the sidebar. */
+  main:has(> .section.cards-metadata-container) {
+    display: flow-root;
+  }
+
   main > .section.cards-metadata-container {
     float: left;
     box-sizing: border-box;
     width: 291px;
+
     /* left-align the sidebar to the shared content-column edge so it lines up
        with the H1 / breadcrumb above it (matches wknd.site) */
     margin: 40px 0 0 max(32px, calc((100% - 1200px) / 2));

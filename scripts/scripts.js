@@ -83,18 +83,25 @@ function buildWidgetAutoBlocks(main) {
 function buildBreadcrumbsAutoBlock(main) {
   if (main.querySelector('.breadcrumbs')) return;
 
-  // 1) authored breadcrumb: a leading <ol> in the first section whose items are
-  //    a section link followed by the current page name.
   const firstDiv = main.querySelector(':scope > div');
-  const authoredOl = firstDiv
-    && firstDiv.firstElementChild
-    && firstDiv.firstElementChild.tagName === 'OL'
-    && firstDiv.firstElementChild.querySelector('a[href]')
-    ? firstDiv.firstElementChild
-    : null;
+
+  // 1) authored breadcrumb: an <ol> near the top of the page whose first item
+  //    links to a section index (e.g. Magazine > Arctic Surfing). It may not be
+  //    the literal first child (article pages precede it with a hero image), so
+  //    scan the first couple of sections.
+  let authoredOl = null;
+  const candidateSections = [...main.querySelectorAll(':scope > div')].slice(0, 2);
+  candidateSections.some((sec) => {
+    const ol = [...sec.querySelectorAll('ol')].find((o) => {
+      const firstLink = o.querySelector('li:first-child a[href]');
+      return firstLink && /\/(adventures|magazine)(\.html|\/|$)/.test(firstLink.getAttribute('href'));
+    });
+    if (ol) { authoredOl = ol; return true; }
+    return false;
+  });
   if (authoredOl) {
     const block = buildBlock('breadcrumbs', { elems: [authoredOl] });
-    firstDiv.prepend(block);
+    (firstDiv || main).prepend(block);
     return;
   }
 

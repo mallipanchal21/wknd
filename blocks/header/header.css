@@ -277,16 +277,18 @@ header nav .nav-tools .icon-search img {
 }
 
 /* ── Dark top utility bar (Sign In + language toggle) ── */
+
+/* full-width dark strip; content grouped to the right like wknd.site */
 header .nav-utility {
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  gap: 16px;
+  justify-content: flex-end;
+  gap: 24px;
   width: 100%;
   box-sizing: border-box;
-  padding: 3px 35px;
+  padding: 2px 35px;
   background-color: var(--dark-color); /* #202020 */
-  color: #f7f7f7;
+  color: #ebebeb;
   font-family: var(--body-font-family);
   font-size: 14px;
   line-height: 21px;
@@ -297,7 +299,7 @@ header .nav-utility .nav-signin {
 }
 
 header .nav-utility .nav-signin a:any-link {
-  color: #f7f7f7;
+  color: #ebebeb;
   text-decoration: none;
 }
 
@@ -309,7 +311,6 @@ header .nav-utility .nav-signin a:hover {
 /* language toggle + dropdown */
 header .nav-utility .nav-lang {
   position: relative;
-  margin-left: auto;
 }
 
 header .nav-utility .nav-lang-toggle {

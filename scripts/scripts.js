@@ -81,6 +81,10 @@ function buildWidgetAutoBlocks(main) {
  * @param {Element} main The container element
  */
 function buildBreadcrumbsAutoBlock(main) {
+  // Only decorate the real page <main>. Header/footer fragments are decorated
+  // via their own detached <main> (see fragment.js → decorateMain); synthesising
+  // a breadcrumb there injects a stray trail over the logo / into the footer.
+  if (main !== document.querySelector('main')) return;
   if (main.querySelector('.breadcrumbs')) return;
 
   const firstDiv = main.querySelector(':scope > div');

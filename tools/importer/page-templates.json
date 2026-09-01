@@ -129,6 +129,20 @@
             ".buildingblock.responsivegrid",
             "[class*=cmp-experiencefragment]"
           ]
+        },
+        {
+          "name": "columns",
+          "instances": [
+            ".teaser.cmp-teaser--featured",
+            ".cmp-teaser--featured"
+          ]
+        },
+        {
+          "name": "cards",
+          "instances": [
+            ".cmp-image-list",
+            ".image-list.list"
+          ]
         }
       ],
       "sections": [

@@ -1,0 +1,15 @@
+{
+  "type": "da",
+  "sites": {
+    "wknd": {
+      "previewOrg": "mallipanchal21",
+      "previewSite": "wknd",
+      "contentHostUrl": "https://content.da.live/mallipanchal21/wknd/",
+      "libraryUrl": "https://main--sta-boilerplate--aemdemos.aem.page/tools/sidekick/library.json"
+    }
+  },
+  "features": [
+    "site-planning"
+  ],
+  "pluginRoot": "/home/node/.excat-marketplaces/excat-marketplace/excat"
+}

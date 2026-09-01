@@ -1,0 +1,84 @@
+/* cards-team: person / team teaser cards - circular photo, name, role, social icons */
+
+.cards-team > ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 32px;
+}
+
+.cards-team > ul > li {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  border: none;
+  background: none;
+}
+
+.cards-team .cards-team-card-image {
+  line-height: 0;
+  width: 160px;
+}
+
+.cards-team .cards-team-card-image img {
+  width: 160px;
+  height: 160px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.cards-team .cards-team-card-body {
+  margin: 16px 0 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+
+.cards-team .cards-team-card-body h3 {
+  margin: 8px 0 0;
+  font-size: var(--heading-font-size-s, 22px);
+}
+
+.cards-team .cards-team-card-body h4,
+.cards-team .cards-team-card-body h5 {
+  margin: 0;
+  font-size: var(--body-font-size-xs, 14px);
+  font-weight: 400;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.cards-team .cards-team-social {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 12px;
+}
+
+.cards-team .cards-team-social a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  background-color: #2b2b2b;
+  color: #fff;
+  border-radius: 2px;
+  font-size: 0;
+  line-height: 0;
+}
+
+.cards-team .cards-team-social a:hover {
+  background-color: #000;
+}
+
+.cards-team .cards-team-social a .icon,
+.cards-team .cards-team-social a img {
+  width: 18px;
+  height: 18px;
+  filter: invert(1);
+}

@@ -1,0 +1,40 @@
+{
+  "variantName": "cards-filter",
+  "baseBlock": "cards",
+  "version": "1.0.0",
+  "created": "2026-09-01T00:00:00.000Z",
+  "sourceContext": {
+    "originUrl": "https://wknd.site/us/en/adventures.html",
+    "originPage": "adventures listing page (adventures-listing template)",
+    "blockPosition": "middle"
+  },
+  "visualCharacteristics": {
+    "colorScheme": "light",
+    "density": "wide",
+    "purpose": "filterable-listing",
+    "imagePattern": "large"
+  },
+  "contentPattern": {
+    "structure": "category filter tabs (All + one per category) + grid of cards (linked image + linked title + short description)",
+    "buttonCount": 0,
+    "imageCount": 16
+  },
+  "reuseGuidance": {
+    "suitableFor": [
+      "adventure / product / article listing grids with category filter tabs",
+      "any image-title-description card grid where visitors filter by a category",
+      "'current adventures' / 'browse by category' style listings"
+    ],
+    "notSuitableFor": [
+      "simple card grids with no filtering (use vanilla cards)",
+      "people / team teaser grids with circular photos and social links (use cards-team)",
+      "key/value metadata sidebars (use cards-metadata)",
+      "switching whole long-form content panels (use tabs-adventure)"
+    ]
+  },
+  "usage": {
+    "pagesUsing": ["/us/en/adventures"],
+    "reuseCount": 1,
+    "lastUsed": "2026-09-01T00:00:00.000Z"
+  }
+}

@@ -1,0 +1,38 @@
+{
+  "variantName": "quote",
+  "baseBlock": "quote",
+  "version": "1.0.0",
+  "created": "2026-09-01T00:00:00.000Z",
+  "sourceContext": {
+    "originUrl": "https://wknd.site/us/en/magazine/arctic-surfing.html",
+    "originPage": "arctic-surfing magazine article (article-page template)",
+    "blockPosition": "middle"
+  },
+  "visualCharacteristics": {
+    "colorScheme": "light",
+    "density": "spacious",
+    "purpose": "pull-quote",
+    "imagePattern": "noimg"
+  },
+  "contentPattern": {
+    "structure": "quotation + optional attribution",
+    "buttonCount": 0,
+    "imageCount": 0
+  },
+  "reuseGuidance": {
+    "suitableFor": [
+      "long-form article pull-quotes",
+      "highlighted quotations",
+      "testimonial callouts"
+    ],
+    "notSuitableFor": [
+      "inline blockquotes that should stay in the text flow",
+      "multi-item testimonial grids"
+    ]
+  },
+  "usage": {
+    "pagesUsing": ["/us/en/magazine/arctic-surfing"],
+    "reuseCount": 1,
+    "lastUsed": "2026-09-01T00:00:00.000Z"
+  }
+}

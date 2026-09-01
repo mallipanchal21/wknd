@@ -1,0 +1,39 @@
+{
+  "variantName": "cards-team",
+  "baseBlock": "cards",
+  "version": "1.0.0",
+  "created": "2026-09-01T00:00:00.000Z",
+  "sourceContext": {
+    "originUrl": "https://wknd.site/us/en/about-us.html",
+    "originPage": "About Us (content-listing template)",
+    "blockPosition": "middle"
+  },
+  "visualCharacteristics": {
+    "colorScheme": "light",
+    "density": "spacious",
+    "purpose": "team-people-teaser",
+    "imagePattern": "large"
+  },
+  "contentPattern": {
+    "structure": "repeating item: circular photo + name (H3) + role line + 3 social icon links",
+    "buttonCount": 3,
+    "imageCount": 1
+  },
+  "reuseGuidance": {
+    "suitableFor": [
+      "team / contributor / staff people grids",
+      "person teaser cards with circular photo, name, role, and social links",
+      "'meet the team' / 'our contributors' / 'guides' sections"
+    ],
+    "notSuitableFor": [
+      "article/product cards with rectangular images and descriptions",
+      "text-only link lists (use related-stories)",
+      "side-by-side column layouts"
+    ]
+  },
+  "usage": {
+    "pagesUsing": ["/us/en/about-us"],
+    "reuseCount": 1,
+    "lastUsed": "2026-09-01T00:00:00.000Z"
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "variantName": "breadcrumbs",
+  "baseBlock": "breadcrumbs",
+  "version": "1.0.0",
+  "created": "2026-09-01T00:00:00.000Z",
+  "visualCharacteristics": {
+    "colorScheme": "light",
+    "density": "compact",
+    "purpose": "navigation",
+    "imagePattern": "noimg"
+  },
+  "contentPattern": {
+    "structure": "ordered list of breadcrumb links; the last item is the current (non-link) page. Usually auto-generated from the URL path, but an authored <ol> is styled as-is",
+    "buttonCount": 0,
+    "imageCount": 0
+  },
+  "usage": {
+    "pagesUsing": [],
+    "reuseCount": 0,
+    "lastUsed": "2026-09-01T00:00:00.000Z"
+  }
+}

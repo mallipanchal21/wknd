@@ -1,0 +1,22 @@
+{
+  "variantName": "hero",
+  "baseBlock": "hero",
+  "version": "1.0.0",
+  "created": "2026-09-01T00:00:00.000Z",
+  "visualCharacteristics": {
+    "colorScheme": "light",
+    "density": "spacious",
+    "purpose": "hero",
+    "imagePattern": "large"
+  },
+  "contentPattern": {
+    "structure": "single-cell full-bleed image with an overlaid text panel (heading + description)",
+    "buttonCount": 0,
+    "imageCount": 1
+  },
+  "usage": {
+    "pagesUsing": ["/us/en", "/us/en/adventures"],
+    "reuseCount": 2,
+    "lastUsed": "2026-09-01T00:00:00.000Z"
+  }
+}

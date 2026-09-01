@@ -1,0 +1,22 @@
+{
+  "variantName": "header",
+  "baseBlock": "header",
+  "version": "1.0.0",
+  "created": "2026-09-01T00:00:00.000Z",
+  "visualCharacteristics": {
+    "colorScheme": "light",
+    "density": "default",
+    "purpose": "site-navigation",
+    "imagePattern": "logo"
+  },
+  "contentPattern": {
+    "structure": "loads the /nav fragment: brand logo, primary nav links, search, and a dark utility bar (sign in + language toggle)",
+    "buttonCount": 0,
+    "imageCount": 1
+  },
+  "usage": {
+    "pagesUsing": [],
+    "reuseCount": 0,
+    "lastUsed": "2026-09-01T00:00:00.000Z"
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "variantName": "widget",
+  "baseBlock": "widget",
+  "version": "1.0.0",
+  "created": "2026-09-01T00:00:00.000Z",
+  "visualCharacteristics": {
+    "colorScheme": "light",
+    "density": "default",
+    "purpose": "embed",
+    "imagePattern": "noimg"
+  },
+  "contentPattern": {
+    "structure": "single cell holding a link to a /widgets/ asset; the widget's HTML/CSS/JS are loaded into the block",
+    "buttonCount": 0,
+    "imageCount": 0
+  },
+  "usage": {
+    "pagesUsing": [],
+    "reuseCount": 0,
+    "lastUsed": "2026-09-01T00:00:00.000Z"
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "variantName": "columns",
+  "baseBlock": "columns",
+  "version": "1.0.0",
+  "created": "2026-09-01T00:00:00.000Z",
+  "visualCharacteristics": {
+    "colorScheme": "light",
+    "density": "default",
+    "purpose": "layout",
+    "imagePattern": "large"
+  },
+  "contentPattern": {
+    "structure": "one row split into multiple columns (cells); image-only columns get a dedicated image class, others hold text/heading/CTA",
+    "buttonCount": 1,
+    "imageCount": 1
+  },
+  "usage": {
+    "pagesUsing": ["/us/en", "/us/en/magazine", "/index"],
+    "reuseCount": 3,
+    "lastUsed": "2026-09-01T00:00:00.000Z"
+  }
+}

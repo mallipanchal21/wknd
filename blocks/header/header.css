@@ -10,6 +10,17 @@ header .nav-wrapper {
   position: fixed;
 }
 
+/* Below 900px the nav-wrapper is position:fixed (z-index:2) and stands 113px
+   tall — the 88px nav plus the 25px dark utility bar. The header placeholder in
+   styles.css only reserves --nav-height (88px), so the fixed, stacked bar would
+   overlap the top ~25px of <main> and paint over it (hiding the breadcrumb).
+   Reserve the full fixed-header height so page content starts below it. */
+@media (width < 900px) {
+  header {
+    height: calc(var(--nav-height) + 25px);
+  }
+}
+
 header nav {
   box-sizing: border-box;
   display: grid;

@@ -36,26 +36,26 @@
   margin: 0;
 }
 
-/* Title: Source Sans Pro, 18px, bold, uppercase, dark (overrides global h3) */
+/* Title: Source Sans Pro, 18px, regular, link-blue, no transform (matches source) */
 .cards .cards-card-body h3 {
   margin: 9px 0 0;
   padding: 0;
   font-family: var(--body-font-family);
   font-size: 18px;
-  font-weight: 600;
+  font-weight: 400;
   line-height: 27px;
   letter-spacing: normal;
-  text-transform: uppercase;
-  color: var(--text-color);
+  text-transform: none;
+  color: var(--link-color);
 }
 
 .cards .cards-card-body h3 a:any-link {
-  color: var(--text-color);
+  color: var(--link-color);
   text-decoration: none;
 }
 
 .cards .cards-card-body h3 a:hover {
-  color: var(--link-color);
+  color: var(--link-hover-color);
   text-decoration: none;
 }
 

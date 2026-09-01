@@ -28,7 +28,7 @@
   width: 100%;
   height: auto;
   object-fit: cover;
-  aspect-ratio: 16 / 9; /* mobile: shows full 1280x720 image uncropped */
+  aspect-ratio: auto; /* mobile: shows the full image uncropped (natural ratio) */
 }
 
 /* --- White text panel (row 2) --- */
@@ -56,7 +56,7 @@
 
 @media (width >= 900px) {
   .hero img {
-    aspect-ratio: 2 / 1; /* desktop: cropped to 2:1 (1280x640) */
+    aspect-ratio: 9 / 4; /* desktop: source crops to 2.25:1 (1440x640) */
   }
 
   /* panel overlaps the bottom of the image, centered with ~44px gutters */

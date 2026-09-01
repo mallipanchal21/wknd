@@ -1,4 +1,4 @@
-/* Breadcrumbs — matches wknd.site (.cmp-breadcrumb): uppercase 14px links,
+/* Breadcrumbs — matches wknd.site (.cmp-breadcrumb): uppercase 12px links,
    dark text, ">" separator between items. */
 .breadcrumbs nav {
   margin: 0;
@@ -17,22 +17,29 @@
 .breadcrumbs .breadcrumbs-item {
   display: flex;
   align-items: center;
+  padding: 10px 5px;
   color: var(--text-color);
   font-family: var(--body-font-family);
-  font-size: 14px;
-  line-height: 21px;
+  font-size: 12px;
+  line-height: 18px;
   text-transform: uppercase;
 }
 
-/* separator before every item except the first */
+/* source: first item is flush-left (no left padding) */
+.breadcrumbs .breadcrumbs-item:first-child {
+  padding-left: 0;
+}
+
+/* separator before every item except the first — source uses a yellow chevron */
 .breadcrumbs .breadcrumbs-item + .breadcrumbs-item::before {
   content: '>';
-  margin: 0 8px;
-  color: var(--text-color);
+  margin-right: 5px;
+  color: var(--accent-color);
 }
 
 .breadcrumbs .breadcrumbs-item a:any-link {
   color: var(--text-color);
+  font-weight: 600;
   text-decoration: none;
 }
 

@@ -7,19 +7,20 @@
   flex-direction: column;
 }
 
-/* text column (grey panel) */
+/* text column (grey panel) — mobile: appears first, above the image */
 .columns > div > div:not(.columns-img-col) {
-  order: 1;
+  order: 0;
   display: flex;
   flex-direction: column;
-  padding: 40px 24px;
+  box-sizing: border-box; /* padding counts inside the flex-basis so the panel is 37.5%, not 37.5%+padding */
+  padding: 63px 36px 36px;
   background-color: #ebebeb;
   text-align: left;
 }
 
-/* image column */
+/* image column — mobile: below the text panel */
 .columns > div > .columns-img-col {
-  order: 0;
+  order: 1;
   padding: 0;
 }
 
@@ -34,24 +35,24 @@
 .columns > div > div:not(.columns-img-col) > p {
   margin: 0 0 24px;
   font-family: var(--body-font-family);
-  font-size: var(--body-font-size-m);
-  line-height: 1.6;
+  font-size: var(--body-font-size-xs); /* 14px (source) */
+  line-height: 24.5px;
   color: var(--text-color);
 }
 
 /* eyebrow ("Featured Article") */
 .columns > div > div:not(.columns-img-col) > p:first-child {
-  margin: 0 0 8px;
+  margin: 0 0 13.5px;
   font-family: var(--body-font-family);
-  font-size: var(--body-font-size-m);
+  font-size: var(--body-font-size-m); /* 18px */
   font-weight: 700;
-  line-height: 1.25;
+  line-height: 45px;
   color: var(--text-color);
 }
 
 /* title */
 .columns > div > div:not(.columns-img-col) h2 {
-  margin: 0 0 18px;
+  margin: 18px 0;
   font-family: var(--heading-font-family);
   font-size: var(--heading-font-size-xl);
   font-weight: 400;
@@ -87,8 +88,9 @@
   text-decoration: none;
 }
 
-@media (width >= 900px) {
-  /* image left, grey text panel right (source uses row-reverse) */
+/* Tablet + desktop: image left, grey text panel right (source uses row-reverse
+   and keeps side-by-side down to 768px). */
+@media (width >= 768px) {
   .columns > div {
     flex-direction: row-reverse;
     align-items: stretch;
@@ -97,7 +99,7 @@
   .columns > div > div:not(.columns-img-col) {
     order: unset;
     flex: 0 0 37.5%;
-    justify-content: center;
+    justify-content: flex-start; /* source top-aligns the text (63px top pad) */
     padding: 63px 36px 36px;
   }
 

@@ -37,7 +37,7 @@
 .cards-filter > ul {
   display: grid;
   grid-template-columns: 1fr;
-  gap: 32px 16px;
+  gap: 32px 14px; /* source column gap between cards is 14px */
   margin: 0;
   padding: 0;
   list-style: none;

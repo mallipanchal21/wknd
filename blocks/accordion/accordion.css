@@ -16,7 +16,7 @@
   align-items: center;
   justify-content: space-between;
   gap: 16px;
-  padding: 13px 0;
+  padding: 13px;
   border-bottom: 2px solid #ebebeb;
   cursor: pointer;
   list-style: none;
@@ -26,13 +26,14 @@
   display: none;
 }
 
-/* Question text — source uses sentence-case, regular weight, black */
+/* Question text — source: uppercase, semibold (600), 16px black */
 .accordion .accordion-item .accordion-item-label p {
   margin: 0;
   font-family: var(--body-font-family);
   font-size: 16px;
-  font-weight: 400;
+  font-weight: 600;
   line-height: 1.25;
+  text-transform: uppercase;
   color: #000;
 }
 
@@ -40,32 +41,32 @@
 .accordion .accordion-item .accordion-item-label::after {
   content: '';
   flex: 0 0 auto;
-  width: 18px;
-  height: 18px;
+  width: 20px;
+  height: 20px;
   background:
-    linear-gradient(#000, #000) center / 18px 2px no-repeat,
-    linear-gradient(#000, #000) center / 2px 18px no-repeat;
+    linear-gradient(#000, #000) center / 20px 2px no-repeat,
+    linear-gradient(#000, #000) center / 2px 20px no-repeat;
   transition: transform 0.2s ease;
 }
 
 /* Open state → collapse the plus into a minus */
 .accordion .accordion-item[open] .accordion-item-label::after {
-  background: linear-gradient(#000, #000) center / 18px 2px no-repeat;
+  background: linear-gradient(#000, #000) center / 20px 2px no-repeat;
 }
 
 /* Answer panel */
 .accordion .accordion-item .accordion-item-body {
-  padding: 7px 0 14px 7px;
+  padding: 7px 0 0 7px;
   font-family: var(--body-font-family);
   font-size: 14px;
-  line-height: 21px;
+  line-height: 24.5px;
   color: var(--text-color);
 }
 
 .accordion .accordion-item .accordion-item-body p {
-  margin: 0 0 0.8em;
+  margin: 0 0 13.5px;
   font-size: 14px;
-  line-height: 21px;
+  line-height: 24.5px;
   color: var(--text-color);
 }
 

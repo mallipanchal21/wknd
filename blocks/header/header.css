@@ -53,8 +53,12 @@ header nav[aria-expanded='true'] {
     display: flex;
     align-items: center;
     gap: 0;
-    max-width: 100%;
-    padding: 0 40px;
+    max-width: none;
+
+    /* align nav content (logo … search) to the shared content column so its
+       left/right edges match the footer and page sections; the nav-wrapper
+       background stays full-width */
+    padding: 0 max(32px, calc((100% - 1200px) / 2));
   }
 
   header nav[aria-expanded='true'] {
@@ -302,6 +306,15 @@ header .nav-utility {
   font-family: var(--body-font-family);
   font-size: 14px;
   line-height: 21px;
+}
+
+/* On desktop align the utility bar's (right-grouped) content to the same
+   content column as the nav and footer; the dark strip stays full-width. */
+@media (width >= 900px) {
+  header .nav-utility {
+    padding-right: max(32px, calc((100% - 1200px) / 2));
+    padding-left: max(32px, calc((100% - 1200px) / 2));
+  }
 }
 
 header .nav-utility .nav-signin {

@@ -1,5 +1,11 @@
 /* Block: accordion — CSS extracted from wknd.site FAQ (.cmp-accordion) computed styles */
 
+/* source FAQ content sits in a narrower centered column (~748px), not full width */
+.accordion {
+  max-width: 748px;
+  margin-inline: auto;
+}
+
 .accordion .accordion-item {
   background-color: transparent;
 }
@@ -20,15 +26,14 @@
   display: none;
 }
 
-/* Question text */
+/* Question text — source uses sentence-case, regular weight, black */
 .accordion .accordion-item .accordion-item-label p {
   margin: 0;
   font-family: var(--body-font-family);
   font-size: 16px;
-  font-weight: 600;
+  font-weight: 400;
   line-height: 1.25;
   color: #000;
-  text-transform: uppercase;
 }
 
 /* Plus / minus icon (WKND icon-font glyph recreated in CSS) */

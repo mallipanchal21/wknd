@@ -364,21 +364,26 @@ header .nav-utility .nav-lang-toggle[aria-expanded='true'] + .nav-lang-list {
   display: block;
 }
 
-/* country group */
+/* country row — flag as a left background over the whole row (matches source) */
 header .nav-utility .nav-lang-country {
-  margin: 0 0 14px;
+  padding: 8px 0 8px 45px;
+  background-repeat: no-repeat;
+  background-position: 12px center;
+  background-size: 25px auto;
 }
 
-header .nav-utility .nav-lang-country:last-child {
-  margin-bottom: 0;
-}
+header .nav-utility .nav-lang-country-us { background-image: url('/icons/flags/US.svg'); }
+header .nav-utility .nav-lang-country-ca { background-image: url('/icons/flags/CA.svg'); }
+header .nav-utility .nav-lang-country-ch { background-image: url('/icons/flags/CH.svg'); }
+header .nav-utility .nav-lang-country-de { background-image: url('/icons/flags/DE.svg'); }
+header .nav-utility .nav-lang-country-fr { background-image: url('/icons/flags/FR.svg'); }
+header .nav-utility .nav-lang-country-es { background-image: url('/icons/flags/ES.svg'); }
+header .nav-utility .nav-lang-country-it { background-image: url('/icons/flags/IT.svg'); }
 
-/* country heading — flag icon on the left, then country name */
+/* country name heading */
 header .nav-utility .nav-lang-country-title {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  margin: 0 0 4px;
+  display: block;
+  margin: 0;
   color: #ebebeb;
   font-family: var(--body-font-family);
   font-size: 12px;
@@ -387,46 +392,7 @@ header .nav-utility .nav-lang-country-title {
   text-transform: uppercase;
 }
 
-/* flag icon before the country name (source uses country-flags/{CC}.svg) */
-header .nav-utility .nav-lang-country-title::before {
-  content: '';
-  flex: 0 0 auto;
-  width: 28px;
-  height: 20px;
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: contain;
-}
-
-header .nav-utility .nav-lang-country-us .nav-lang-country-title::before {
-  background-image: url('/icons/flags/US.svg');
-}
-
-header .nav-utility .nav-lang-country-ca .nav-lang-country-title::before {
-  background-image: url('/icons/flags/CA.svg');
-}
-
-header .nav-utility .nav-lang-country-ch .nav-lang-country-title::before {
-  background-image: url('/icons/flags/CH.svg');
-}
-
-header .nav-utility .nav-lang-country-de .nav-lang-country-title::before {
-  background-image: url('/icons/flags/DE.svg');
-}
-
-header .nav-utility .nav-lang-country-fr .nav-lang-country-title::before {
-  background-image: url('/icons/flags/FR.svg');
-}
-
-header .nav-utility .nav-lang-country-es .nav-lang-country-title::before {
-  background-image: url('/icons/flags/ES.svg');
-}
-
-header .nav-utility .nav-lang-country-it .nav-lang-country-title::before {
-  background-image: url('/icons/flags/IT.svg');
-}
-
-/* language links under a country */
+/* language links: inline on one row beneath the country name (source layout) */
 header .nav-utility .nav-lang-country ul {
   margin: 0;
   padding: 0;
@@ -434,12 +400,19 @@ header .nav-utility .nav-lang-country ul {
 }
 
 header .nav-utility .nav-lang-country ul li {
+  display: inline;
   margin: 0;
 }
 
+/* pipe separator between multiple languages within a country */
+header .nav-utility .nav-lang-country ul li + li::before {
+  content: '|';
+  margin: 0 7px;
+  color: #f7f7f7;
+}
+
 header .nav-utility .nav-lang-list a:any-link {
-  display: block;
-  padding: 3px 0;
+  display: inline;
   color: #f7f7f7;
   font-size: 14px;
   line-height: 21px;

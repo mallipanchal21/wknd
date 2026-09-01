@@ -24,7 +24,12 @@ export default function decorate(block) {
       social.className = 'cards-team-social';
       links.forEach((p) => {
         const a = p.querySelector('a');
-        if (a) social.append(a);
+        if (a) {
+          // strip any button classes decorateButtons may have added, so the
+          // social-icon styling (dark square + glyph) is not overridden.
+          a.classList.remove('button', 'primary', 'secondary', 'accent');
+          social.append(a);
+        }
         p.remove();
       });
       body.append(social);

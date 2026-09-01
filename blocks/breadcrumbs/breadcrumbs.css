@@ -1,0 +1,46 @@
+/* Breadcrumbs — matches wknd.site (.cmp-breadcrumb): uppercase 14px links,
+   dark text, ">" separator between items. */
+.breadcrumbs nav {
+  margin: 0;
+  padding: 0;
+}
+
+.breadcrumbs .breadcrumbs-list {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.breadcrumbs .breadcrumbs-item {
+  display: flex;
+  align-items: center;
+  color: var(--text-color);
+  font-family: var(--body-font-family);
+  font-size: 14px;
+  line-height: 21px;
+  text-transform: uppercase;
+}
+
+/* separator before every item except the first */
+.breadcrumbs .breadcrumbs-item + .breadcrumbs-item::before {
+  content: '>';
+  margin: 0 8px;
+  color: var(--text-color);
+}
+
+.breadcrumbs .breadcrumbs-item a:any-link {
+  color: var(--text-color);
+  text-decoration: none;
+}
+
+.breadcrumbs .breadcrumbs-item a:hover {
+  text-decoration: underline;
+}
+
+/* current page is not a link */
+.breadcrumbs .breadcrumbs-item[aria-current='page'] {
+  color: var(--text-color);
+}

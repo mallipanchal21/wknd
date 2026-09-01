@@ -74,11 +74,50 @@ function buildWidgetAutoBlocks(main) {
 }
 
 /**
+ * Wraps an authored breadcrumb trail (a leading <ol> whose first link points to
+ * a section index, e.g. Adventures > Bali Surf Camp) in a styled breadcrumbs
+ * block. On adventure/magazine detail pages with no authored breadcrumb, one is
+ * synthesised from the URL path. Matches wknd.site detail-page breadcrumbs.
+ * @param {Element} main The container element
+ */
+function buildBreadcrumbsAutoBlock(main) {
+  if (main.querySelector('.breadcrumbs')) return;
+
+  // 1) authored breadcrumb: a leading <ol> in the first section whose items are
+  //    a section link followed by the current page name.
+  const firstDiv = main.querySelector(':scope > div');
+  const authoredOl = firstDiv
+    && firstDiv.firstElementChild
+    && firstDiv.firstElementChild.tagName === 'OL'
+    && firstDiv.firstElementChild.querySelector('a[href]')
+    ? firstDiv.firstElementChild
+    : null;
+  if (authoredOl) {
+    const block = buildBlock('breadcrumbs', { elems: [authoredOl] });
+    firstDiv.prepend(block);
+    return;
+  }
+
+  // 2) fallback: synthesise from the URL path on known detail sections.
+  const parts = window.location.pathname.replace(/\.html$/, '').replace(/\/$/, '').split('/').filter(Boolean);
+  let segments = parts;
+  if (segments.length >= 2 && /^[a-z]{2}$/.test(segments[0]) && /^[a-z]{2}$/.test(segments[1])) {
+    segments = segments.slice(2);
+  }
+  const sections = ['adventures', 'magazine'];
+  if (segments.length < 2 || !sections.includes(segments[0])) return;
+  const section = firstDiv || main;
+  const block = buildBlock('breadcrumbs', { elems: [] });
+  section.prepend(block);
+}
+
+/**
  * Builds all synthetic blocks in a container element.
  * @param {Element} main The container element
  */
 function buildAutoBlocks(main) {
   try {
+    buildBreadcrumbsAutoBlock(main);
     // auto load `*/fragments/*` references
     const fragments = [...main.querySelectorAll('a[href*="/fragments/"]')].filter((f) => !f.closest('.fragment'));
     if (fragments.length > 0) {

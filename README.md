@@ -2,8 +2,8 @@
 Your project's description...
 
 ## Environments
-- Preview: https://main--{repo}--{owner}.aem.page/
-- Live: https://main--{repo}--{owner}.aem.live/
+- Preview: [https://main--{wknd}--{mallipanchal21}.aem.page/](https://main--wknd--mallipanchal21.aem.page/)
+- Live: [https://main--{wknd}--{mallipanchal21}.aem.live/](https://main--wknd--mallipanchal21.aem.live/)
 
 ## Documentation
 

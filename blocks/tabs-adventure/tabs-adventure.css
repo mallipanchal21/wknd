@@ -87,11 +87,23 @@
 
 /* --- Desktop: 2-column adventure layout. The metadata section floats left as
    a 291px sidebar (see cards-metadata.css); the tabs content is inset to the
-   right of it while staying within the shared 1200px content column. --- */
+   right of it while staying within the shared 1200px content column. The
+   wrapper keeps the normal content-column geometry (max-width 1200, centered,
+   32px side padding, border-box); the inset that clears the floated sidebar is
+   applied to the block itself so BOTH the tab list and the panel align to the
+   same left edge (matches wknd.site: sidebar 291px + ~28px gutter). --- */
 @media (width >= 900px) {
   main > .section.tabs-adventure-container > div {
+    box-sizing: border-box;
     max-width: 1200px;
     margin: 0 auto;
-    padding: 0 32px 0 315px;
+    padding: 0;
+  }
+
+  /* Inset the tabs past the floated 291px sidebar + ~28px gutter so both the
+     tab list and the panel share one left edge, while the block still spans to
+     the content-column right edge (aligning with the H1 above). */
+  main > .section.tabs-adventure-container .tabs-adventure {
+    padding-left: 319px;
   }
 }

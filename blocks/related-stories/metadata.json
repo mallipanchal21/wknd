@@ -1,0 +1,38 @@
+{
+  "variantName": "related-stories",
+  "baseBlock": "cards",
+  "version": "1.0.0",
+  "created": "2026-09-01T00:00:00.000Z",
+  "sourceContext": {
+    "originUrl": "https://wknd.site/us/en/magazine/arctic-surfing.html",
+    "originPage": "arctic-surfing magazine article (article-page template)",
+    "blockPosition": "sidebar"
+  },
+  "visualCharacteristics": {
+    "colorScheme": "light",
+    "density": "compact",
+    "purpose": "related-stories-list",
+    "imagePattern": "noimg"
+  },
+  "contentPattern": {
+    "structure": "repeating item: linked title + publish date",
+    "buttonCount": 0,
+    "imageCount": 0
+  },
+  "reuseGuidance": {
+    "suitableFor": [
+      "article-page related-stories / up-next sidebars",
+      "text-only link lists with dates",
+      "'read next' magazine link lists"
+    ],
+    "notSuitableFor": [
+      "card grids with images",
+      "side-by-side column layouts"
+    ]
+  },
+  "usage": {
+    "pagesUsing": ["/us/en/magazine/arctic-surfing"],
+    "reuseCount": 1,
+    "lastUsed": "2026-09-01T00:00:00.000Z"
+  }
+}

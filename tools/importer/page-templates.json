@@ -1,0 +1,537 @@
+{
+  "templates": [
+    {
+      "name": "homepage",
+      "urls": [
+        "https://wknd.site/",
+        "https://wknd.site/ca/en.html",
+        "https://wknd.site/ca/fr.html",
+        "https://wknd.site/ch/de.html",
+        "https://wknd.site/ch/fr.html",
+        "https://wknd.site/ch/it.html",
+        "https://wknd.site/de/de.html",
+        "https://wknd.site/es/es.html",
+        "https://wknd.site/fr/fr.html",
+        "https://wknd.site/it/it.html",
+        "https://wknd.site/us/en.html",
+        "https://wknd.site/us/es.html"
+      ],
+      "coverageGaps": [],
+      "description": "Landing page with a full-width hero carousel, a featured-article promo (image beside text with CTA), a teaser card grid of recent articles, and an adventure card grid.",
+      "blocks": [
+        {
+          "name": "carousel-hero",
+          "instances": [
+            ".carousel.cmp-carousel--hero",
+            ".carousel.panelcontainer"
+          ]
+        },
+        {
+          "name": "columns",
+          "instances": [
+            ".teaser.cmp-teaser--featured"
+          ]
+        },
+        {
+          "name": "cards",
+          "instances": [
+            ".image-list.list",
+            ".cmp-image-list",
+            "div[id^=container-]"
+          ]
+        },
+        {
+          "name": "hero",
+          "instances": [
+            ".teaser.cmp-teaser--hero"
+          ]
+        }
+      ],
+      "sections": [
+        {
+          "id": "sec-hero",
+          "name": "Hero image carousel",
+          "selector": [
+            ".carousel.cmp-carousel--hero"
+          ],
+          "style": null,
+          "blocks": [
+            "carousel-hero"
+          ],
+          "defaultContent": []
+        },
+        {
+          "id": "sec-featured",
+          "name": "Featured article promo",
+          "selector": [
+            ".teaser.cmp-teaser--featured"
+          ],
+          "style": "grey",
+          "blocks": [
+            "columns"
+          ],
+          "defaultContent": []
+        },
+        {
+          "id": "sec-recent",
+          "name": "Recent Articles teaser grid",
+          "selector": [
+            ".image-list.list"
+          ],
+          "style": null,
+          "blocks": [
+            "cards"
+          ],
+          "defaultContent": []
+        },
+        {
+          "id": "sec-next",
+          "name": "Next Adventures feature",
+          "selector": [
+            ".teaser.cmp-teaser--hero"
+          ],
+          "style": null,
+          "blocks": [
+            "hero"
+          ],
+          "defaultContent": []
+        },
+        {
+          "id": "sec-where",
+          "name": "Where do you want to go grid",
+          "selector": [
+            "div[id^=container-]"
+          ],
+          "style": null,
+          "blocks": [
+            "cards"
+          ],
+          "defaultContent": []
+        }
+      ]
+    },
+    {
+      "name": "content-listing",
+      "urls": [
+        "https://wknd.site/ca/en/about-us.html",
+        "https://wknd.site/ca/en/magazine.html",
+        "https://wknd.site/ca/en/magazine/members-only.html",
+        "https://wknd.site/us/en/about-us.html",
+        "https://wknd.site/us/en/magazine.html"
+      ],
+      "coverageGaps": [],
+      "description": "Section landing/listing page with a page title followed by one or more headed sections, each containing a grid of teaser cards (image, name, role/description, and links).",
+      "blocks": [
+        {
+          "name": "cards-team",
+          "instances": [
+            ".xf-master-building-block",
+            ".buildingblock.responsivegrid",
+            "[class*=cmp-experiencefragment]"
+          ]
+        }
+      ],
+      "sections": [
+        {
+          "id": "sec-title",
+          "name": "Page title",
+          "selector": [
+            "main .aem-Grid > div.title:nth-of-type(1)",
+            ".title"
+          ],
+          "style": null,
+          "blocks": [],
+          "defaultContent": [
+            ".title .cmp-title"
+          ]
+        },
+        {
+          "id": "sec-contributors",
+          "name": "Our Contributors",
+          "selector": [
+            ".title.cmp-title--underline:nth-of-type(2)"
+          ],
+          "style": null,
+          "blocks": [
+            "cards-team"
+          ],
+          "defaultContent": [
+            ".title.cmp-title--underline",
+            ".text"
+          ]
+        },
+        {
+          "id": "sec-guides",
+          "name": "WKND Guides",
+          "selector": [
+            ".title.cmp-title--underline:nth-of-type(4)"
+          ],
+          "style": null,
+          "blocks": [
+            "cards-team"
+          ],
+          "defaultContent": [
+            ".title.cmp-title--underline",
+            ".text"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "adventure-detail",
+      "urls": [
+        "https://wknd.site/ca/en/adventures/bali-surf-camp.html",
+        "https://wknd.site/ca/en/adventures/beervana-portland.html",
+        "https://wknd.site/ca/en/adventures/climbing-new-zealand.html",
+        "https://wknd.site/ca/en/adventures/colorado-rock-climbing.html",
+        "https://wknd.site/ca/en/adventures/cycling-southern-utah.html",
+        "https://wknd.site/ca/en/adventures/cycling-tuscany.html",
+        "https://wknd.site/ca/en/adventures/downhill-skiing-wyoming.html",
+        "https://wknd.site/ca/en/adventures/gastronomic-marais-tour.html",
+        "https://wknd.site/ca/en/adventures/napa-wine-tasting.html",
+        "https://wknd.site/ca/en/adventures/riverside-camping-australia.html",
+        "https://wknd.site/ca/en/adventures/ski-touring-mont-blanc.html",
+        "https://wknd.site/ca/en/adventures/surf-camp-costa-rica.html",
+        "https://wknd.site/ca/en/adventures/tahoe-skiing.html",
+        "https://wknd.site/ca/en/adventures/west-coast-cycling.html",
+        "https://wknd.site/ca/en/adventures/whistler-mountain-biking.html",
+        "https://wknd.site/ca/en/adventures/yosemite-backpacking.html",
+        "https://wknd.site/us/en/adventures/bali-surf-camp.html",
+        "https://wknd.site/us/en/adventures/beervana-portland.html",
+        "https://wknd.site/us/en/adventures/climbing-new-zealand.html",
+        "https://wknd.site/us/en/adventures/colorado-rock-climbing.html",
+        "https://wknd.site/us/en/adventures/cycling-southern-utah.html",
+        "https://wknd.site/us/en/adventures/cycling-tuscany.html",
+        "https://wknd.site/us/en/adventures/downhill-skiing-wyoming.html",
+        "https://wknd.site/us/en/adventures/gastronomic-marais-tour.html",
+        "https://wknd.site/us/en/adventures/napa-wine-tasting.html",
+        "https://wknd.site/us/en/adventures/riverside-camping-australia.html",
+        "https://wknd.site/us/en/adventures/ski-touring-mont-blanc.html",
+        "https://wknd.site/us/en/adventures/surf-camp-costa-rica.html",
+        "https://wknd.site/us/en/adventures/tahoe-skiing.html",
+        "https://wknd.site/us/en/adventures/west-coast-cycling.html",
+        "https://wknd.site/us/en/adventures/whistler-mountain-biking.html",
+        "https://wknd.site/us/en/adventures/yosemite-backpacking.html"
+      ],
+      "coverageGaps": [],
+      "description": "Detail page with a full-width hero image carousel, breadcrumb, a left metadata sidebar of key/value attributes, and a main content area with tabbed sections and body copy plus imagery.",
+      "blocks": [
+        {
+          "name": "carousel-hero",
+          "instances": [
+            ".carousel.panelcontainer",
+            ".cmp-carousel"
+          ]
+        },
+        {
+          "name": "cards-metadata",
+          "instances": [
+            "article.cmp-contentfragment",
+            "[class*=cmp-contentfragment]"
+          ]
+        },
+        {
+          "name": "tabs-adventure",
+          "instances": [
+            ".tabs.panelcontainer",
+            ".cmp-tabs"
+          ]
+        }
+      ],
+      "sections": [
+        {
+          "id": "sec-breadcrumb",
+          "name": "Breadcrumb",
+          "selector": [
+            ".breadcrumb"
+          ],
+          "style": null,
+          "blocks": [],
+          "defaultContent": [
+            ".breadcrumb .cmp-breadcrumb"
+          ]
+        },
+        {
+          "id": "sec-hero",
+          "name": "Hero image carousel",
+          "selector": [
+            ".carousel.panelcontainer"
+          ],
+          "style": null,
+          "blocks": [
+            "carousel-hero"
+          ],
+          "defaultContent": []
+        },
+        {
+          "id": "sec-title",
+          "name": "Page title",
+          "selector": [
+            ".title.cmp-title--underline",
+            ".title"
+          ],
+          "style": null,
+          "blocks": [],
+          "defaultContent": [
+            ".title .cmp-title"
+          ]
+        },
+        {
+          "id": "sec-meta",
+          "name": "Adventure metadata sidebar",
+          "selector": [
+            "article.cmp-contentfragment"
+          ],
+          "style": null,
+          "blocks": [
+            "cards-metadata"
+          ],
+          "defaultContent": []
+        },
+        {
+          "id": "sec-tabs",
+          "name": "Tabbed content",
+          "selector": [
+            ".tabs.panelcontainer"
+          ],
+          "style": null,
+          "blocks": [
+            "tabs-adventure"
+          ],
+          "defaultContent": []
+        }
+      ]
+    },
+    {
+      "name": "adventures-listing",
+      "urls": [
+        "https://wknd.site/ca/en/adventures.html",
+        "https://wknd.site/us/en/adventures.html"
+      ],
+      "coverageGaps": [],
+      "description": "Listing page with a page title, hero banner with overlaid intro text, and a filterable grid of teaser cards categorized by tabs/filters.",
+      "blocks": [
+        {
+          "name": "hero",
+          "instances": [
+            ".teaser.cmp-teaser--hero"
+          ]
+        },
+        {
+          "name": "cards-filter",
+          "instances": [
+            ".tabs.panelcontainer",
+            ".cmp-tabs"
+          ]
+        }
+      ],
+      "sections": [
+        {
+          "id": "sec-title",
+          "name": "Page title",
+          "selector": [
+            "main.cmp-layout-container--fixed:nth-of-type(1)",
+            ".title"
+          ],
+          "style": null,
+          "blocks": [],
+          "defaultContent": [
+            ".title .cmp-title"
+          ]
+        },
+        {
+          "id": "sec-hero",
+          "name": "Hero banner",
+          "selector": [
+            ".teaser.cmp-teaser--hero"
+          ],
+          "style": null,
+          "blocks": [
+            "hero"
+          ],
+          "defaultContent": []
+        },
+        {
+          "id": "sec-adventures-grid",
+          "name": "Current Adventures",
+          "selector": [
+            ".tabs.panelcontainer"
+          ],
+          "style": null,
+          "blocks": [
+            "cards-filter"
+          ],
+          "defaultContent": [
+            ".title.cmp-title--underline"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "faq-page",
+      "urls": [
+        "https://wknd.site/ca/en/faqs.html",
+        "https://wknd.site/us/en/faqs.html"
+      ],
+      "coverageGaps": [],
+      "description": "Simple content page with a page title and a stacked list of question-and-answer text blocks (accordion-style FAQ layout).",
+      "blocks": [
+        {
+          "name": "accordion",
+          "instances": [
+            ".accordion.panelcontainer",
+            ".accordion",
+            ".cmp-accordion"
+          ]
+        }
+      ],
+      "sections": [
+        {
+          "id": "sec-title",
+          "name": "Page title",
+          "selector": [
+            ".title.cmp-title--underline",
+            ".title"
+          ],
+          "style": null,
+          "blocks": [],
+          "defaultContent": [
+            ".title .cmp-title"
+          ]
+        },
+        {
+          "id": "sec-intro",
+          "name": "Intro",
+          "selector": [
+            "main .aem-Grid > .image",
+            ".image.aem-GridColumn"
+          ],
+          "style": null,
+          "blocks": [],
+          "defaultContent": [
+            ".image img",
+            ".text"
+          ]
+        },
+        {
+          "id": "sec-faq",
+          "name": "FAQ accordion",
+          "selector": [
+            ".accordion.panelcontainer",
+            ".accordion"
+          ],
+          "style": null,
+          "blocks": [
+            "accordion"
+          ],
+          "defaultContent": []
+        },
+        {
+          "id": "sec-help",
+          "name": "Need more help",
+          "selector": [
+            "div[id^=container-]"
+          ],
+          "style": null,
+          "blocks": [],
+          "defaultContent": [
+            ".title",
+            ".text"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "article-page",
+      "urls": [
+        "https://wknd.site/ca/en/magazine/arctic-surfing.html",
+        "https://wknd.site/ca/en/magazine/guide-la-skateparks.html",
+        "https://wknd.site/ca/en/magazine/members-only/alaskan-adventure.html",
+        "https://wknd.site/ca/en/magazine/members-only/fly-fishing-the-amazon.html",
+        "https://wknd.site/ca/en/magazine/san-diego-surf.html",
+        "https://wknd.site/ca/en/magazine/ski-touring.html",
+        "https://wknd.site/ca/en/magazine/western-australia.html",
+        "https://wknd.site/us/en/magazine/arctic-surfing.html",
+        "https://wknd.site/us/en/magazine/guide-la-skateparks.html",
+        "https://wknd.site/us/en/magazine/san-diego-surf.html",
+        "https://wknd.site/us/en/magazine/ski-touring.html",
+        "https://wknd.site/us/en/magazine/western-australia.html"
+      ],
+      "coverageGaps": [],
+      "description": "Long-form article page with a hero image, article title and byline, a right-hand related-stories sidebar, and body copy split into multiple headed text sections with inline images.",
+      "blocks": [
+        {
+          "name": "quote",
+          "instances": [
+            ".quote",
+            "blockquote",
+            ".cmp-quote"
+          ]
+        },
+        {
+          "name": "related-stories",
+          "instances": [
+            "aside.cmp-layoutcontainer--sidebar",
+            "aside.container.responsivegrid"
+          ]
+        }
+      ],
+      "sections": [
+        {
+          "id": "sec-hero",
+          "name": "Hero image",
+          "selector": [
+            "main.cmp-layout-container--fixed > .cmp-container .image:first-child",
+            ".image.aem-GridColumn"
+          ],
+          "style": null,
+          "blocks": [],
+          "defaultContent": [
+            ".image img"
+          ]
+        },
+        {
+          "id": "sec-body",
+          "name": "Article body",
+          "selector": [
+            "main.aem-GridColumn--default--8 > .cmp-container",
+            "main.aem-GridColumn--default--8"
+          ],
+          "style": null,
+          "blocks": [
+            "quote"
+          ],
+          "defaultContent": [
+            ".title",
+            ".text"
+          ]
+        },
+        {
+          "id": "sec-author",
+          "name": "Author bio",
+          "selector": [
+            "[class*=cmp-experiencefragment]"
+          ],
+          "style": null,
+          "blocks": [],
+          "defaultContent": []
+        },
+        {
+          "id": "sec-related",
+          "name": "Related stories sidebar",
+          "selector": [
+            "aside.cmp-layoutcontainer--sidebar"
+          ],
+          "style": null,
+          "blocks": [
+            "related-stories"
+          ],
+          "defaultContent": []
+        }
+      ]
+    }
+  ],
+  "metadata": {
+    "projectType": "da"
+  }
+}

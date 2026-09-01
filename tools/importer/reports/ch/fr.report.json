@@ -1,0 +1,14 @@
+{
+  "status": "success",
+  "url": "https://wknd.site/ch/fr.html",
+  "path": "ch/fr",
+  "timestamp": "2026-09-01T07:47:21.789Z",
+  "title": "Français",
+  "template": "homepage",
+  "blocks": [
+    "cards",
+    "cards",
+    "cards",
+    "hero"
+  ]
+}

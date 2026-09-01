@@ -1,0 +1,39 @@
+.related-stories .related-stories-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.related-stories .related-stories-item {
+  border-top: 1px solid #dadada;
+  padding: 16px 0;
+}
+
+.related-stories .related-stories-item:last-child {
+  border-bottom: 1px solid #dadada;
+}
+
+.related-stories .related-stories-link {
+  display: block;
+  text-decoration: none;
+  color: inherit;
+}
+
+.related-stories .related-stories-title {
+  display: block;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  line-height: 1.3;
+}
+
+.related-stories .related-stories-link:hover .related-stories-title {
+  text-decoration: underline;
+}
+
+.related-stories .related-stories-date {
+  display: block;
+  margin-top: 4px;
+  font-size: 0.8125rem;
+  color: #6e6e6e;
+}

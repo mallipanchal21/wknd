@@ -1,0 +1,47 @@
+/*
+ * cards-metadata: vertical, stacked attribute list used as the adventure
+ * metadata sidebar (label above value, left accent border per item).
+ * Derived from the vanilla cards block; grid layout replaced with a
+ * single-column stack to match the source sidebar design.
+ */
+
+.cards-metadata > ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.cards-metadata > ul > li {
+  border-left: 3px solid var(--link-color, #ffea00);
+  padding-left: 16px;
+}
+
+.cards-metadata .cards-metadata-card-body {
+  margin: 0;
+}
+
+.cards-metadata .cards-metadata-card-body > *:first-child {
+  margin: 0 0 4px;
+  font-size: var(--body-font-size-xs);
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.cards-metadata .cards-metadata-card-body > *:last-child {
+  margin: 0;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+.cards-metadata .cards-metadata-card-image {
+  line-height: 0;
+}
+
+.cards-metadata > ul > li img {
+  width: 100%;
+  object-fit: cover;
+}

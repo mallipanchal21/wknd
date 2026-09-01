@@ -59,7 +59,9 @@
     float: left;
     box-sizing: border-box;
     width: 291px;
-    margin: 40px 0 0 max(32px, calc((100% - 1200px) / 2 + 32px));
+    /* left-align the sidebar to the shared content-column edge so it lines up
+       with the H1 / breadcrumb above it (matches wknd.site) */
+    margin: 40px 0 0 max(32px, calc((100% - 1200px) / 2));
     padding: 0;
   }
 

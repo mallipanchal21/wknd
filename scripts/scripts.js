@@ -121,24 +121,33 @@ function decorateButtons(main) {
       if (new URL(a.href).href === new URL(text, window.location).href) return;
     } catch { /* continue */ }
 
-    // require authored formatting for buttonization
     const strong = a.closest('strong');
     const em = a.closest('em');
-    if (!strong && !em) return;
 
-    p.className = 'button-wrapper';
-    a.className = 'button';
-    if (strong && em) { // high-impact call-to-action
-      a.classList.add('accent');
-      const outer = strong.contains(em) ? strong : em;
-      outer.replaceWith(a);
-    } else if (strong) {
-      a.classList.add('primary');
-      strong.replaceWith(a);
-    } else {
-      a.classList.add('secondary');
-      em.replaceWith(a);
+    // authored formatting → button variant
+    if (strong || em) {
+      p.className = 'button-wrapper';
+      a.className = 'button';
+      if (strong && em) { // high-impact call-to-action
+        a.classList.add('accent');
+        const outer = strong.contains(em) ? strong : em;
+        outer.replaceWith(a);
+      } else if (strong) {
+        a.classList.add('primary');
+        strong.replaceWith(a);
+      } else {
+        a.classList.add('secondary');
+        em.replaceWith(a);
+      }
+      return;
     }
+
+    // WKND convention: a standalone link that is the sole content of its
+    // paragraph is a primary call-to-action button (e.g. "All Articles",
+    // "See Trip", "All Trips"). The p.textContent === text check above already
+    // guarantees the link is the paragraph's only content.
+    p.className = 'button-wrapper';
+    a.className = 'button primary';
   });
 }
 

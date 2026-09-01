@@ -1,37 +1,73 @@
+/* Hero -- full-bleed image with an overlaid white text panel.
+   Source: wknd.site teaser (cmp-teaser--hero). Values from computed styles.
+   Decorated DOM: .hero.block > div(row1) > div > picture(img)
+                                > div(row2) > div > h2 + p            */
+
+/* Full-bleed: escape the section's 1200px content wrapper (only for the hero,
+   leaving sibling default content -- e.g. "Current Adventures" -- constrained). */
 .hero-container .hero-wrapper {
-  max-width: unset;
+  max-width: 100%;
   padding: 0;
 }
 
 .hero {
   position: relative;
-  padding: 40px 24px;
-  min-height: 300px;
 }
 
-.hero h1 {
-  max-width: 1200px;
-  margin-left: auto;
-  margin-right: auto;
-  color: var(--background-color);
+/* --- Image (row 1) --- */
+.hero > div:first-child {
+  line-height: 0; /* kill inline whitespace under picture */
 }
 
 .hero picture {
-  position: absolute;
-  z-index: -1;
-  inset: 0;
-  object-fit: cover;
-  box-sizing: border-box;
+  display: block;
 }
 
 .hero img {
-  object-fit: cover;
+  display: block;
   width: 100%;
-  height: 100%;
+  height: auto;
+  object-fit: cover;
+  aspect-ratio: 16 / 9; /* mobile: shows full 1280x720 image uncropped */
+}
+
+/* --- White text panel (row 2) --- */
+.hero > div:last-child > div {
+  padding: 0 14px 24px; /* mobile: sits below image, transparent (section is white) */
+}
+
+.hero h2 {
+  margin: 18px 0 0;
+  color: var(--text-color);
+  font-family: var(--heading-font-family);
+  font-size: 36px;
+  font-weight: 400;
+  line-height: 54px;
+}
+
+.hero p {
+  margin: 0;
+  color: var(--text-color);
+  font-family: var(--body-font-family);
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 31.5px;
 }
 
 @media (width >= 900px) {
-  .hero {
-    padding: 40px 32px;
+  .hero img {
+    aspect-ratio: 2 / 1; /* desktop: cropped to 2:1 (1280x640) */
+  }
+
+  /* panel overlaps the bottom of the image, centered with ~44px gutters */
+  .hero > div:last-child {
+    position: relative;
+    max-width: 1192px;
+    margin: -180px auto 0;
+    background-color: var(--background-color);
+  }
+
+  .hero > div:last-child > div {
+    padding: 0 28px 40px;
   }
 }

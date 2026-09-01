@@ -124,7 +124,7 @@ export default async function decorate(block) {
   nav.id = 'nav';
   while (fragment.firstElementChild) nav.append(fragment.firstElementChild);
 
-  const classes = ['brand', 'sections', 'tools'];
+  const classes = ['brand', 'sections', 'tools', 'utility'];
   classes.forEach((c, i) => {
     const section = nav.children[i];
     if (section) section.classList.add(`nav-${c}`);
@@ -139,6 +139,12 @@ export default async function decorate(block) {
 
   const navSections = nav.querySelector('.nav-sections');
   if (navSections) {
+    // highlight the nav link matching the current page (WKND yellow active state)
+    const currentPath = window.location.pathname.replace(/\.html$/, '').replace(/\/$/, '');
+    navSections.querySelectorAll(':scope a').forEach((a) => {
+      const linkPath = new URL(a.href, window.location).pathname.replace(/\.html$/, '').replace(/\/$/, '');
+      if (linkPath === currentPath) a.setAttribute('aria-current', 'page');
+    });
     navSections.querySelectorAll(':scope .default-content-wrapper > ul > li').forEach((navSection) => {
       if (navSection.querySelector('ul')) navSection.classList.add('nav-drop');
       navSection.addEventListener('click', () => {
@@ -164,8 +170,57 @@ export default async function decorate(block) {
   toggleMenu(nav, navSections, isDesktop.matches);
   isDesktop.addEventListener('change', () => toggleMenu(nav, navSections, isDesktop.matches));
 
+  // dark top utility bar: Sign In + language toggle revealing the language navigation
+  const navUtility = nav.querySelector('.nav-utility');
+  if (navUtility) {
+    // the toggle label = current locale (authored as .nav-lang-current, falls back to first list item)
+    const currentEl = navUtility.querySelector('.nav-lang-current');
+    const langList = navUtility.querySelector('ul');
+    const currentLabel = (currentEl && currentEl.textContent.trim())
+      || (langList && langList.querySelector('a') ? langList.querySelector('a').textContent.trim() : 'en-US');
+    if (currentEl) currentEl.remove();
+
+    // build the toggle button that opens the language menu
+    const langWrapper = document.createElement('div');
+    langWrapper.className = 'nav-lang';
+    const langToggle = document.createElement('button');
+    langToggle.type = 'button';
+    langToggle.className = 'nav-lang-toggle';
+    langToggle.setAttribute('aria-expanded', 'false');
+    langToggle.setAttribute('aria-label', `Toggle Language ${currentLabel}`);
+    langToggle.textContent = currentLabel;
+    langWrapper.append(langToggle);
+
+    if (langList) {
+      langList.classList.add('nav-lang-list');
+      // mark the active locale
+      langList.querySelectorAll('a').forEach((a) => {
+        if (a.textContent.trim() === currentLabel) a.setAttribute('aria-current', 'true');
+      });
+      langWrapper.append(langList);
+      langToggle.addEventListener('click', () => {
+        const open = langToggle.getAttribute('aria-expanded') === 'true';
+        langToggle.setAttribute('aria-expanded', open ? 'false' : 'true');
+      });
+      // close on outside click
+      document.addEventListener('click', (e) => {
+        if (!langWrapper.contains(e.target)) langToggle.setAttribute('aria-expanded', 'false');
+      });
+    }
+
+    // rebuild utility bar content: sign-in first (left), language toggle (right)
+    navUtility.textContent = '';
+    const signIn = document.createElement('p');
+    signIn.className = 'nav-signin';
+    signIn.innerHTML = '<a href="#sign-in">Sign In</a>';
+    navUtility.append(signIn, langWrapper);
+    // lift the utility bar out of the nav so it can be a full-width strip above the nav
+    nav.removeChild(navUtility);
+  }
+
   const navWrapper = document.createElement('div');
   navWrapper.className = 'nav-wrapper';
+  if (navUtility) navWrapper.append(navUtility);
   navWrapper.append(nav);
   block.append(navWrapper);
 }

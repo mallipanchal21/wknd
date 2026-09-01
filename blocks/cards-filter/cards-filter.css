@@ -1,57 +1,123 @@
-.cards-filter-tabs {
+/* Block: cards-filter — styling extracted from wknd.site computed styles
+   Source: https://wknd.site/us/en/adventures.html (.cmp-tabs "Current Adventures") */
+
+/* --- Filter tabs --- */
+.cards-filter .cards-filter-tabs {
   display: flex;
   flex-wrap: wrap;
-  gap: 8px;
-  margin: 0 0 24px;
-  border-bottom: 1px solid #dadada;
+  gap: 0;
+  margin: 18px 0;
+  padding: 0;
 }
 
-.cards-filter-tab {
+.cards-filter .cards-filter-tab {
   appearance: none;
+  margin: 0;
   border: 0;
-  background: transparent;
+  border-radius: 0;
   padding: 8px 16px;
-  font: inherit;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-  cursor: pointer;
+  background: transparent;
   color: var(--text-color);
-  border-bottom: 3px solid transparent;
+  font-family: var(--body-font-family);
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 21px;
+  text-transform: uppercase;
+  text-decoration: none;
+  cursor: pointer;
 }
 
-.cards-filter-tab[aria-selected='true'] {
-  font-weight: 700;
-  border-bottom-color: var(--text-color);
+/* WKND active-tab style: dark background, white text */
+.cards-filter .cards-filter-tab[aria-selected='true'] {
+  background-color: var(--dark-color);
+  color: var(--background-color);
 }
 
+/* --- Card grid --- */
 .cards-filter > ul {
-  list-style: none;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 32px 16px;
   margin: 0;
   padding: 0;
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(257px, 1fr));
-  gap: 24px;
+  list-style: none;
 }
 
 .cards-filter > ul > li {
-  border: 1px solid #dadada;
-  background-color: var(--background-color);
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: transparent;
 }
 
 .cards-filter > ul > li[hidden] {
   display: none;
 }
 
-.cards-filter .cards-filter-card-body {
-  margin: 16px;
-}
-
+/* --- Card image (top) --- */
 .cards-filter .cards-filter-card-image {
   line-height: 0;
 }
 
-.cards-filter > ul > li img {
+.cards-filter > ul > li img,
+.cards-filter .cards-filter-card-image img {
+  display: block;
   width: 100%;
-  aspect-ratio: 4 / 3;
+  aspect-ratio: 13 / 10;
   object-fit: cover;
+}
+
+/* --- Card body --- */
+.cards-filter .cards-filter-card-body {
+  margin: 0;
+}
+
+/* Title: body font, uppercase, semibold, dark (overrides heading font + link color) */
+.cards-filter .cards-filter-card-body h3 {
+  margin: 10px 0 0;
+  padding: 0;
+  font-family: var(--body-font-family);
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 1.2;
+  text-transform: uppercase;
+  color: var(--text-color);
+}
+
+.cards-filter .cards-filter-card-body h3 a:any-link {
+  color: var(--text-color);
+  text-decoration: none;
+}
+
+.cards-filter .cards-filter-card-body h3 a:hover {
+  text-decoration: underline;
+}
+
+/* Description: small, uppercase, grey — clamped to one line with ellipsis (matches source) */
+.cards-filter .cards-filter-card-body p {
+  margin: 16px 0 0;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 21px;
+  text-transform: uppercase;
+  color: #696969;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 1;
+  overflow: hidden;
+}
+
+/* --- Responsive: 2-up tablet, 4-up desktop (source is 4-across) --- */
+@media (width >= 600px) {
+  .cards-filter > ul {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (width >= 900px) {
+  .cards-filter > ul {
+    grid-template-columns: repeat(4, 1fr);
+  }
 }

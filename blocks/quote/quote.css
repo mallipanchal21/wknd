@@ -1,41 +1,37 @@
-.quote blockquote {
-  margin: 0 auto;
-  padding: 0 24px;
-  max-width: 900px;
-}
+/* Quote block — visual design matched to wknd.site (arctic-surfing pull-quote).
+ * Source: <blockquote> inside AEM .cmp-text. Computed styles show plain body
+ * typography (NOT serif/italic/centered): Source Sans Pro 18px / 400 / normal,
+ * left-aligned, line-height 1.5, color #202020, indented 40px each side.
+ * Source adds NO generated quote marks — the quote characters are literal text. */
 
-@media (width >= 900px) {
-  .quote blockquote {
-    padding: 0 32px;
-  }
+.quote blockquote {
+  margin: 18px 40px;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: var(--text-color);
+  font-family: var(--body-font-family);
+  font-size: var(--body-font-size-m); /* 18px */
+  font-weight: 400;
+  font-style: normal;
+  line-height: 1.5; /* 27px */
+  text-align: left;
 }
 
 .quote blockquote .quote-quotation {
-  font-size: 120%;
+  font-size: inherit;
 }
 
-.quote blockquote .quote-quotation > :first-child {
-  text-indent: -0.5ch;
+.quote blockquote .quote-quotation p {
+  margin: 0;
 }
 
-.quote blockquote .quote-quotation p:first-child::before,
-.quote blockquote .quote-quotation p:last-child::after {
-  line-height: 0;
-}
-
-.quote blockquote .quote-quotation p:first-child::before {
-  content: '“';
-}
-
-.quote blockquote .quote-quotation p:last-child::after {
-  content: '”';
-}
-
+/* Attribution (not present in this content, but supported by quote.js) */
 .quote blockquote .quote-attribution {
+  margin-top: 8px;
   text-align: right;
 }
 
-.quote blockquote .quote-attribution p:first-child::before {
-  content: '—';
-  padding-right: 0.5ch;
+.quote blockquote .quote-attribution cite {
+  font-style: italic;
 }

@@ -1,0 +1,30 @@
+/* WKND brand tokens — extracted from wknd.site */
+:root {
+  /* fonts */
+  --heading-font-family: 'Asar', georgia, 'Times New Roman', times, serif;
+  --body-font-family: 'Source Sans Pro', 'Helvetica Neue', helvetica, arial, sans-serif;
+
+  /* colors */
+  --background-color: #fff;
+  --light-color: #f5f5f5;
+  --dark-color: #202020;
+  --text-color: #202020;
+  --link-color: #0045ff;
+  --link-hover-color: #0035c9;
+
+  /* brand accent (WKND signature yellow) */
+  --accent-color: #ffea00;
+  --accent-text-color: #202020;
+
+  /* spacing */
+  --nav-height: 88px;
+  --section-padding: 40px;
+
+  /* heading sizes (desktop) */
+  --heading-font-size-xxl: 55px;
+  --heading-font-size-xl: 36px;
+  --heading-font-size-l: 24px;
+  --heading-font-size-m: 20px;
+  --heading-font-size-s: 18px;
+  --heading-font-size-xs: 16px;
+}

@@ -1,47 +1,50 @@
 /*
  * cards-metadata: vertical, stacked attribute list used as the adventure
- * metadata sidebar (label above value, left accent border per item).
- * Derived from the vanilla cards block; grid layout replaced with a
- * single-column stack to match the source sidebar design.
+ * metadata sidebar. Each item shows a small uppercase grey label above an
+ * uppercase bold value, with a subtle light-grey left accent border.
+ * Values extracted from source computed styles (wknd.site content fragment).
  */
 
 .cards-metadata > ul {
   list-style: none;
-  margin: 0;
-  padding: 0;
   display: flex;
   flex-direction: column;
-  gap: 24px;
+  margin: 18px 0;
+  padding: 0;
 }
 
 .cards-metadata > ul > li {
-  border-left: 3px solid var(--link-color, #ffea00);
-  padding-left: 16px;
+  margin: 0 0 22.5px;
+  padding: 0 0 0 18px;
+  border-left: 5px solid #ebebeb;
 }
 
 .cards-metadata .cards-metadata-card-body {
   margin: 0;
 }
 
+/* label (authored h3) */
+.cards-metadata .cards-metadata-card-body h3,
 .cards-metadata .cards-metadata-card-body > *:first-child {
-  margin: 0 0 4px;
-  font-size: var(--body-font-size-xs);
-  font-weight: bold;
+  margin: 0;
+  padding: 12px 0 0;
+  font-family: var(--body-font-family);
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 18px;
   text-transform: uppercase;
-  letter-spacing: 0.05em;
+  color: #696969;
 }
 
+/* value (authored p) */
+.cards-metadata .cards-metadata-card-body p,
 .cards-metadata .cards-metadata-card-body > *:last-child {
   margin: 0;
-  font-weight: bold;
+  padding: 7px 0 0;
+  font-family: var(--body-font-family);
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 21px;
   text-transform: uppercase;
-}
-
-.cards-metadata .cards-metadata-card-image {
-  line-height: 0;
-}
-
-.cards-metadata > ul > li img {
-  width: 100%;
-  object-fit: cover;
+  color: var(--text-color);
 }

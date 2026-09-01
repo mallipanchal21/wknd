@@ -173,11 +173,28 @@ export default async function decorate(block) {
   // dark top utility bar: Sign In + language toggle revealing the language navigation
   const navUtility = nav.querySelector('.nav-utility');
   if (navUtility) {
-    // the toggle label = current locale (authored as .nav-lang-current, falls back to first list item)
-    const currentEl = navUtility.querySelector('.nav-lang-current');
     const langList = navUtility.querySelector('ul');
-    const currentLabel = (currentEl && currentEl.textContent.trim())
-      || (langList && langList.querySelector('a') ? langList.querySelector('a').textContent.trim() : 'en-US');
+    // determine the current locale from the language list by matching the page path.
+    // (a .nav-lang-current marker may be authored, but DA can strip its class, so the
+    //  page path is the reliable source of truth.)
+    const currentPathTop = window.location.pathname.replace(/\.html$/, '').replace(/\/$/, '');
+    let currentLabel = '';
+    if (langList) {
+      const links = [...langList.querySelectorAll('a')];
+      // exact locale-home match, e.g. /ch/de for a /ch/de/* page
+      const match = links.find((a) => {
+        const p = new URL(a.href, window.location).pathname.replace(/\.html$/, '').replace(/\/$/, '');
+        return currentPathTop === p || currentPathTop.startsWith(`${p}/`);
+      });
+      if (match) currentLabel = match.textContent.trim();
+    }
+    // fallbacks: authored marker, else first list item, else en-US
+    const currentEl = navUtility.querySelector('.nav-lang-current');
+    if (!currentLabel && currentEl) currentLabel = currentEl.textContent.trim();
+    if (!currentLabel && langList && langList.querySelector('a')) {
+      currentLabel = langList.querySelector('a').textContent.trim();
+    }
+    if (!currentLabel) currentLabel = 'en-US';
     if (currentEl) currentEl.remove();
 
     // build the toggle button that opens the language menu

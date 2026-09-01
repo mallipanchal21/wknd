@@ -221,8 +221,23 @@ export function decorateMain(main) {
  * Loads everything needed to get to LCP.
  * @param {Element} doc The container element
  */
+/**
+ * Derives the document language from the URL locale segment so each localized
+ * page reports its real language (e.g. /ch/de/... → "de", /fr/fr/... → "fr").
+ * The site uses a /{country}/{lang}/... path pattern; the language is the
+ * second segment. Falls back to "en".
+ * @returns {string} a BCP-47 language subtag
+ */
+function getDocumentLang() {
+  const seg = window.location.pathname.split('/').filter(Boolean);
+  if (seg.length >= 2 && /^[a-z]{2}$/.test(seg[0]) && /^[a-z]{2}$/.test(seg[1])) {
+    return seg[1];
+  }
+  return 'en';
+}
+
 async function loadEager(doc) {
-  document.documentElement.lang = 'en';
+  document.documentElement.lang = getDocumentLang();
   decorateTemplateAndTheme();
   const main = doc.querySelector('main');
   if (main) {

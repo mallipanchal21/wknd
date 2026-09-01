@@ -1,3 +1,22 @@
+/* Block: carousel-hero
+ * Design migrated from wknd.site (.cmp-carousel--hero).
+ * Full-bleed 2:1 image with a white caption card overlapping the image bottom,
+ * small black chevron arrows bottom-right, centered dot indicators below.
+ * Values extracted from source computed styles.
+ */
+
+/* Full-bleed: escape the section's 1200px max-width + padding */
+.carousel-hero-wrapper {
+  max-width: 100% !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+.carousel-hero.block {
+  max-width: 100%;
+}
+
+/* --- Slides mechanics (drives JS scrollTo / scroll-snap) --- */
 .carousel-hero .carousel-hero-slides-container {
   position: relative;
 }
@@ -21,133 +40,178 @@
 }
 
 .carousel-hero .carousel-hero-slide {
+  position: relative;
   flex: 0 0 100%;
   scroll-snap-align: start;
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
-  justify-content: center;
-  position: relative;
   width: 100%;
-  min-height: min(50vw, calc(100dvh - var(--header-height)));
 }
 
-.carousel-hero .carousel-hero-slide:has(.carousel-hero-slide-content[data-align='center']) {
-  align-items: center;
-}
-
-.carousel-hero .carousel-hero-slide:has(.carousel-hero-slide-content[data-align='right']) {
-  align-items: flex-end;
-}
-
-.carousel-hero .carousel-hero-slide .carousel-hero-slide-image picture {
-  position: absolute;
-  inset: 0;
-}
-
-.carousel-hero .carousel-hero-slide .carousel-hero-slide-image picture > img {
-  height: 100%;
+/* --- Slide image: full-bleed, 2:1 (source 1280x640) --- */
+.carousel-hero .carousel-hero-slide-image {
   width: 100%;
+}
+
+.carousel-hero .carousel-hero-slide-image picture {
+  display: block;
+}
+
+.carousel-hero .carousel-hero-slide-image img {
+  display: block;
+  width: 100%;
+  aspect-ratio: 2 / 1;
   object-fit: cover;
 }
 
-.carousel-hero .carousel-hero-slide .carousel-hero-slide-content {
-  z-index: 1;
-  margin: 68px;
-  padding: 16px;
-  color: white;
-  background-color: rgb(19 19 19 / 75%);
+/* --- Caption card: white box overlapping the image bottom --- */
+.carousel-hero .carousel-hero-slide-content {
   position: relative;
-  width: var(--slide-content-width, auto);
+  z-index: 1;
+  box-sizing: border-box;
+  width: 100%;
+  background-color: var(--background-color);
+  color: var(--text-color);
+  padding: 8px 28px 24px;
 }
 
+.carousel-hero .carousel-hero-slide-content h2 {
+  margin: 18px 0 0;
+  font-family: var(--heading-font-family);
+  font-size: var(--heading-font-size-xl); /* 36px */
+  font-weight: 400;
+  line-height: 1.5;
+  color: var(--text-color);
+}
+
+.carousel-hero .carousel-hero-slide-content p {
+  margin: 0;
+  font-family: var(--body-font-family);
+  font-size: var(--body-font-size-m); /* 18px */
+  font-weight: 400;
+  line-height: 1.75;
+  color: var(--text-color);
+}
+
+/* CTA link is authored as a bare <a> (not auto-decorated as .button) */
+.carousel-hero .carousel-hero-slide-content p:last-child {
+  margin: 18px 0 0;
+}
+
+.carousel-hero .carousel-hero-slide-content a {
+  display: inline-block;
+  margin: 0;
+  border: 0;
+  border-radius: 0;
+  padding: 14px 35px;
+  background-color: var(--accent-color);
+  color: var(--accent-text-color);
+  font-family: var(--body-font-family);
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  line-height: 1.25;
+  text-transform: uppercase;
+  text-decoration: none;
+}
+
+.carousel-hero .carousel-hero-slide-content a:hover,
+.carousel-hero .carousel-hero-slide-content a:focus-visible {
+  background-color: var(--accent-text-color);
+  color: var(--accent-color);
+  text-decoration: none;
+}
+
+/* --- Navigation arrows: small black chevrons, bottom-right --- */
+.carousel-hero .carousel-hero-navigation-buttons {
+  position: absolute;
+  right: 16px;
+  bottom: 8px;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+
+/* stylelint-disable-next-line no-descending-specificity */
+.carousel-hero .carousel-hero-navigation-buttons button {
+  position: relative;
+  width: 26px;
+  height: 24px;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background-color: transparent;
+  cursor: pointer;
+}
+
+.carousel-hero .carousel-hero-navigation-buttons button::after {
+  display: block;
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 11px;
+  height: 11px;
+  border: 2px solid #000;
+  border-bottom: 0;
+  border-right: 0;
+  transform: translate(-30%, -50%) rotate(-45deg);
+}
+
+.carousel-hero .carousel-hero-navigation-buttons button.slide-next::after {
+  border: 2px solid #000;
+  border-top: 0;
+  border-left: 0;
+  transform: translate(-70%, -50%) rotate(-45deg);
+}
+
+.carousel-hero .carousel-hero-navigation-buttons button:hover::after,
+.carousel-hero .carousel-hero-navigation-buttons button:focus-visible::after {
+  border-color: var(--text-color);
+}
+
+/* --- Indicators: centered dots below the image --- */
 .carousel-hero .carousel-hero-slide-indicators {
   display: flex;
   flex-wrap: wrap;
+  align-items: center;
   justify-content: center;
-  gap: 6px 12px;
+  gap: 14px;
+  margin: 9px 0 0;
   padding: 12px;
-  background-color: var(--light-color);
   line-height: 0;
 }
 
 .carousel-hero .carousel-hero-slide-indicator button {
-  width: 24px;
-  height: 24px;
+  width: 10px;
+  height: 10px;
   margin: 0;
   padding: 0;
+  border: 0;
   border-radius: 50%;
-  background-color: #dadada;
+  background-color: rgb(175 175 175);
+  cursor: pointer;
   transition: background-color 0.2s;
 }
 
 .carousel-hero .carousel-hero-slide-indicator button:disabled,
 .carousel-hero .carousel-hero-slide-indicator button:hover,
 .carousel-hero .carousel-hero-slide-indicator button:focus-visible {
-  background-color: var(--text-color);
+  background-color: rgb(0 0 0 / 80%);
 }
 
-.carousel-hero .carousel-hero-navigation-buttons {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  left: 12px;
-  right: 12px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  z-index: 1;
-}
+/* --- Desktop: card centered at content width, overlapping image bottom --- */
+@media (width >= 900px) {
+  .carousel-hero .carousel-hero-slide-content {
+    width: auto;
+    max-width: var(--content-max-width, 1200px);
+    margin: -150px auto 0;
+    padding: 8px 28px 28px;
+  }
 
-/* stylelint-disable-next-line no-descending-specificity */
-.carousel-hero .carousel-hero-navigation-buttons button {
-  position: relative;
-  width: 44px;
-  height: 44px;
-  margin: 0;
-  border-radius: 50%;
-  padding: 0;
-  background-color: rgb(19 19 19 / 25%);
-  transition: background-color 0.2s;
-}
-
-.carousel-hero .carousel-hero-navigation-buttons button:hover,
-.carousel-hero .carousel-hero-navigation-buttons button:focus-visible {
-  background-color: rgb(19 19 19 / 75%);
-}
-
-.carousel-hero .carousel-hero-navigation-buttons button::after {
-  display: block;
-  content: '';
-  border: 2px solid;
-  border-bottom: 0;
-  border-left: 0;
-  height: 12px;
-  width: 12px;
-  position: absolute;
-  top: 50%;
-  left: calc(50% + 2px);
-  transform: translate(-50%, -50%) rotate(-135deg);
-}
-
-.carousel-hero .carousel-hero-navigation-buttons button.slide-next::after {
-  transform: translate(-50%, -50%) rotate(45deg);
-  left: calc(50% - 2px);
-}
-
-@media (width >= 600px) {
   .carousel-hero .carousel-hero-navigation-buttons {
-    left: 24px;
-    right: 24px;
-  }
-
-  .carousel-hero .carousel-hero-slide .carousel-hero-slide-content {
-    --slide-content-width: calc((100% - 184px) / 2);
-
-    margin: 92px;
-  }
-
-  .carousel-hero .carousel-hero-slide .carousel-hero-slide-content[data-align='justify'] {
-    --slide-content-width: auto;
+    right: 40px;
+    bottom: 12px;
   }
 }

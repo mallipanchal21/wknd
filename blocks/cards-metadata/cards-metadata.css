@@ -48,3 +48,24 @@
   text-transform: uppercase;
   color: var(--text-color);
 }
+
+/* --- Desktop: metadata is a narrow LEFT sidebar; the tabs section (next
+   sibling) flows into the space beside it. Source: 291px sidebar at the
+   content-column left edge, tabs filling the remaining width. The two blocks
+   live in separate full-width EDS sections, so we float the metadata section
+   and inset the tabs section (see tabs-adventure.css). --- */
+@media (width >= 900px) {
+  main > .section.cards-metadata-container {
+    float: left;
+    box-sizing: border-box;
+    width: 291px;
+    margin: 40px 0 0 max(32px, calc((100% - 1200px) / 2 + 32px));
+    padding: 0;
+  }
+
+  main > .section.cards-metadata-container > div {
+    max-width: none;
+    margin: 0;
+    padding: 0 24px 0 0;
+  }
+}

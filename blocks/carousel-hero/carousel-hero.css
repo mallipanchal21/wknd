@@ -60,8 +60,16 @@
 .carousel-hero .carousel-hero-slide-image img {
   display: block;
   width: 100%;
-  aspect-ratio: 2 / 1;
+  aspect-ratio: 16 / 9; /* mobile/tablet: natural 1280x720 */
   object-fit: cover;
+}
+
+/* Adventure-detail hero: single slide (no indicators) and no caption card.
+   Source renders a fixed 400px-tall full-bleed image (object-fit: cover)
+   at every viewport, not an aspect-ratio crop. */
+.carousel-hero:not(:has(.carousel-hero-slide-indicators)) .carousel-hero-slide-image img {
+  aspect-ratio: auto;
+  height: 400px;
 }
 
 /* --- Caption card: white box overlapping the image bottom --- */
@@ -72,7 +80,12 @@
   width: 100%;
   background-color: var(--background-color);
   color: var(--text-color);
-  padding: 8px 28px 24px;
+  padding: 8px 14px 24px;
+}
+
+/* Hide the empty caption cell on single-slide detail heroes */
+.carousel-hero .carousel-hero-slide-content:empty {
+  display: none;
 }
 
 .carousel-hero .carousel-hero-slide-content h2 {
@@ -203,10 +216,14 @@
 
 /* --- Desktop: card centered at content width, overlapping image bottom --- */
 @media (width >= 900px) {
+  .carousel-hero .carousel-hero-slide-image img {
+    aspect-ratio: 9 / 4; /* desktop: source crops to 2.25:1 (1440x640) */
+  }
+
   .carousel-hero .carousel-hero-slide-content {
     width: auto;
     max-width: var(--content-max-width, 1200px);
-    margin: -150px auto 0;
+    margin: -180px auto 0;
     padding: 8px 28px 28px;
   }
 

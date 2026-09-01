@@ -33,9 +33,16 @@ main .section.cards-team-container > div:not(.cards-team-wrapper) {
   margin-bottom: 8px;
 }
 
-/* each single-person card: 2 across on mobile, 4 across on desktop */
+/* each single-person card: 1-up mobile, 2-up tablet, 4-up desktop
+   (matches source: 1-up < 600, 2-up at 768, 4-up at desktop) */
 main .section.cards-team-container > .cards-team-wrapper {
-  flex: 0 0 50%;
+  flex: 0 0 100%;
+}
+
+@media (width >= 768px) {
+  main .section.cards-team-container > .cards-team-wrapper {
+    flex: 0 0 50%;
+  }
 }
 
 @media (width >= 900px) {
@@ -88,7 +95,7 @@ main .section.cards-team-container > .cards-team-wrapper {
   margin: 14px 0 6px;
   padding: 0;
   font-family: var(--heading-font-family);
-  font-size: var(--heading-font-size-l, 24px);
+  font-size: 24px; /* source computed 24px; overrides global h3 token (22px) */
   font-weight: 400;
   line-height: 36px;
   letter-spacing: normal;

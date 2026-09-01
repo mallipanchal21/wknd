@@ -300,6 +300,7 @@ header .nav-utility .nav-signin {
 
 header .nav-utility .nav-signin a:any-link {
   color: #ebebeb;
+  text-transform: uppercase;
   text-decoration: none;
 }
 

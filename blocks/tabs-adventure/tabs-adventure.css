@@ -84,3 +84,14 @@
 .tabs-adventure .tabs-adventure-list button.tabs-adventure-tab p {
   margin: 0;
 }
+
+/* --- Desktop: 2-column adventure layout. The metadata section floats left as
+   a 291px sidebar (see cards-metadata.css); the tabs content is inset to the
+   right of it while staying within the shared 1200px content column. --- */
+@media (width >= 900px) {
+  main > .section.tabs-adventure-container > div {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 32px 0 315px;
+  }
+}

@@ -343,8 +343,12 @@ main .section > div > h3::after {
    site has one or the other, never both).
    Children order: 1 heading, 2 intro, 3-6 teaser A (h2/desc/btn/img),
    7-10 teaser B (h2/desc/btn/img).
+   Scoped away from .article-body: article bodies also contain a picture +
+   multiple h2s, but they must read as a single flowing column, not the
+   members-only teaser grid. The :not() keeps the members-only listing block
+   (the only other wrapper with both images and multiple h2s) matched.
    --------------------------------------------------------------------------- */
-main .default-content-wrapper:has(picture):has(h2 ~ h2) {
+main .default-content-wrapper:not(.article-body *):has(picture):has(h2 ~ h2) {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 0 40px;
@@ -352,63 +356,63 @@ main .default-content-wrapper:has(picture):has(h2 ~ h2) {
 }
 
 /* "Members Only" heading + intro span the full width */
-main .default-content-wrapper:has(picture):has(h2 ~ h2) > :nth-child(1) {
+main .default-content-wrapper:not(.article-body *):has(picture):has(h2 ~ h2) > :nth-child(1) {
   grid-column: 1 / -1;
   grid-row: 1;
 }
 
-main .default-content-wrapper:has(picture):has(h2 ~ h2) > :nth-child(2) {
+main .default-content-wrapper:not(.article-body *):has(picture):has(h2 ~ h2) > :nth-child(2) {
   grid-column: 1 / -1;
   grid-row: 2;
   margin-top: 0;
 }
 
 /* Teaser A → column 1 (image on top, then heading, description, button) */
-main .default-content-wrapper:has(picture):has(h2 ~ h2) > :nth-child(6) {
+main .default-content-wrapper:not(.article-body *):has(picture):has(h2 ~ h2) > :nth-child(6) {
   grid-column: 1;
   grid-row: 3;
   margin: 0;
 }
 
-main .default-content-wrapper:has(picture):has(h2 ~ h2) > :nth-child(3) {
+main .default-content-wrapper:not(.article-body *):has(picture):has(h2 ~ h2) > :nth-child(3) {
   grid-column: 1;
   grid-row: 4;
 }
 
-main .default-content-wrapper:has(picture):has(h2 ~ h2) > :nth-child(4) {
+main .default-content-wrapper:not(.article-body *):has(picture):has(h2 ~ h2) > :nth-child(4) {
   grid-column: 1;
   grid-row: 5;
 }
 
-main .default-content-wrapper:has(picture):has(h2 ~ h2) > :nth-child(5) {
+main .default-content-wrapper:not(.article-body *):has(picture):has(h2 ~ h2) > :nth-child(5) {
   grid-column: 1;
   grid-row: 6;
 }
 
 /* Teaser B → column 2 */
-main .default-content-wrapper:has(picture):has(h2 ~ h2) > :nth-child(10) {
+main .default-content-wrapper:not(.article-body *):has(picture):has(h2 ~ h2) > :nth-child(10) {
   grid-column: 2;
   grid-row: 3;
   margin: 0;
 }
 
-main .default-content-wrapper:has(picture):has(h2 ~ h2) > :nth-child(7) {
+main .default-content-wrapper:not(.article-body *):has(picture):has(h2 ~ h2) > :nth-child(7) {
   grid-column: 2;
   grid-row: 4;
 }
 
-main .default-content-wrapper:has(picture):has(h2 ~ h2) > :nth-child(8) {
+main .default-content-wrapper:not(.article-body *):has(picture):has(h2 ~ h2) > :nth-child(8) {
   grid-column: 2;
   grid-row: 5;
 }
 
-main .default-content-wrapper:has(picture):has(h2 ~ h2) > :nth-child(9) {
+main .default-content-wrapper:not(.article-body *):has(picture):has(h2 ~ h2) > :nth-child(9) {
   grid-column: 2;
   grid-row: 6;
 }
 
 /* teaser images fill their column with a consistent crop */
-main .default-content-wrapper:has(picture):has(h2 ~ h2) img {
+main .default-content-wrapper:not(.article-body *):has(picture):has(h2 ~ h2) img {
   display: block;
   width: 100%;
   height: 260px;
@@ -416,83 +420,82 @@ main .default-content-wrapper:has(picture):has(h2 ~ h2) img {
 }
 
 /* teaser titles: smaller than the section heading, no accent bar */
-main .default-content-wrapper:has(picture):has(h2 ~ h2) > h2:not(:first-child) {
+main .default-content-wrapper:not(.article-body *):has(picture):has(h2 ~ h2) > h2:not(:first-child) {
   margin: 16px 0 4px;
   padding-bottom: 0;
   font-size: 24px;
 }
 
-main .default-content-wrapper:has(picture):has(h2 ~ h2) > h2:not(:first-child)::after {
+main .default-content-wrapper:not(.article-body *):has(picture):has(h2 ~ h2) > h2:not(:first-child)::after {
   display: none;
 }
 
 /* stack to a single column on mobile/tablet, keeping image-on-top order */
 @media (width < 900px) {
-  main .default-content-wrapper:has(picture):has(h2 ~ h2) {
+  main .default-content-wrapper:not(.article-body *):has(picture):has(h2 ~ h2) {
     grid-template-columns: 1fr;
     gap: 0;
   }
 
-  main .default-content-wrapper:has(picture):has(h2 ~ h2) > :nth-child(1) {
+  main .default-content-wrapper:not(.article-body *):has(picture):has(h2 ~ h2) > :nth-child(1) {
     grid-column: 1;
     grid-row: 1;
   }
 
-  main .default-content-wrapper:has(picture):has(h2 ~ h2) > :nth-child(2) {
+  main .default-content-wrapper:not(.article-body *):has(picture):has(h2 ~ h2) > :nth-child(2) {
     grid-column: 1;
     grid-row: 2;
   }
 
-  main .default-content-wrapper:has(picture):has(h2 ~ h2) > :nth-child(6) {
+  main .default-content-wrapper:not(.article-body *):has(picture):has(h2 ~ h2) > :nth-child(6) {
     grid-column: 1;
     grid-row: 3;
   }
 
-  main .default-content-wrapper:has(picture):has(h2 ~ h2) > :nth-child(3) {
+  main .default-content-wrapper:not(.article-body *):has(picture):has(h2 ~ h2) > :nth-child(3) {
     grid-column: 1;
     grid-row: 4;
   }
 
-  main .default-content-wrapper:has(picture):has(h2 ~ h2) > :nth-child(4) {
+  main .default-content-wrapper:not(.article-body *):has(picture):has(h2 ~ h2) > :nth-child(4) {
     grid-column: 1;
     grid-row: 5;
   }
 
-  main .default-content-wrapper:has(picture):has(h2 ~ h2) > :nth-child(5) {
+  main .default-content-wrapper:not(.article-body *):has(picture):has(h2 ~ h2) > :nth-child(5) {
     grid-column: 1;
     grid-row: 6;
   }
 
-  main .default-content-wrapper:has(picture):has(h2 ~ h2) > :nth-child(10) {
+  main .default-content-wrapper:not(.article-body *):has(picture):has(h2 ~ h2) > :nth-child(10) {
     grid-column: 1;
     grid-row: 7;
     margin-top: 24px;
   }
 
-  main .default-content-wrapper:has(picture):has(h2 ~ h2) > :nth-child(7) {
+  main .default-content-wrapper:not(.article-body *):has(picture):has(h2 ~ h2) > :nth-child(7) {
     grid-column: 1;
     grid-row: 8;
   }
 
-  main .default-content-wrapper:has(picture):has(h2 ~ h2) > :nth-child(8) {
+  main .default-content-wrapper:not(.article-body *):has(picture):has(h2 ~ h2) > :nth-child(8) {
     grid-column: 1;
     grid-row: 9;
   }
 
-  main .default-content-wrapper:has(picture):has(h2 ~ h2) > :nth-child(9) {
+  main .default-content-wrapper:not(.article-body *):has(picture):has(h2 ~ h2) > :nth-child(9) {
     grid-column: 1;
     grid-row: 10;
   }
 }
 
 /* ---------------------------------------------------------------------------
-   Magazine article-detail two-column layout.
+   Magazine article-detail single-column layout.
    scripts.js (decorateMagazineArticle) wraps the article body sections and the
    related-stories section into .article-layout > .article-body + .article-aside
-   on /{locale}/magazine/<slug> pages. On desktop the body is a readable column
-   with the "Share this Story" / related-stories list as a right sidebar
-   (matches wknd.site); on mobile it stacks. The hero + breadcrumb stay
-   full-width above the grid.
+   on /{locale}/magazine/<slug> pages. The article body, the Download PDF card,
+   and the related-stories list all read as one centered column (body first, the
+   aside content stacked beneath it). The hero + breadcrumb stay full-width above.
    --------------------------------------------------------------------------- */
 main .article-layout > .article-body > .section,
 main .article-layout > .article-aside > .section {
@@ -501,16 +504,14 @@ main .article-layout > .article-aside > .section {
 
 @media (width >= 900px) {
   main .article-layout {
-    display: grid;
-    grid-template-columns: minmax(0, 1fr) 263px;
-    gap: 0 48px;
-    max-width: 1200px;
+    display: flex;
+    flex-direction: column;
+    max-width: 840px;
     margin: 40px auto;
     padding: 0 32px;
-    align-items: start;
   }
 
-  /* body + aside sections drop their own centering/padding — the grid owns it */
+  /* body + aside sections drop their own centering/padding — the layout owns it */
   main .article-layout > .article-body > .section > div,
   main .article-layout > .article-aside > .section > div {
     max-width: none;
@@ -518,9 +519,9 @@ main .article-layout > .article-aside > .section {
     padding: 0;
   }
 
+  /* aside content (Download card + related stories) stacks below the body */
   main .article-layout > .article-aside {
-    position: sticky;
-    top: 24px;
+    margin-top: 32px;
   }
 }
 
@@ -574,6 +575,7 @@ main .section.byline .byline-text {
   gap: 6px;
 }
 
+/* stylelint-disable-next-line no-descending-specificity */
 main .section.byline .byline-text h2,
 main .section.byline .byline-text h3,
 main .section.byline .byline-text h4 {

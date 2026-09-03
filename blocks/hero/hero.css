@@ -52,6 +52,7 @@
   font-size: 18px;
   font-weight: 400;
   line-height: 31.5px;
+  text-align: justify; /* source justifies the teaser paragraph */
 }
 
 @media (width >= 900px) {
@@ -67,7 +68,14 @@
     background-color: var(--background-color);
   }
 
+  /* source white panel: 18px top / 76px bottom padding gives the ~180px panel
+     height. Zero the heading's top margin so the panel padding (not a
+     collapsing margin) controls the top gap. */
   .hero > div:last-child > div {
-    padding: 0 28px 40px;
+    padding: 18px 28px 76px;
+  }
+
+  .hero > div:last-child h2 {
+    margin-top: 0;
   }
 }

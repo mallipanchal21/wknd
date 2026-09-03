@@ -490,12 +490,13 @@ main .default-content-wrapper:not(.article-body *):has(picture):has(h2 ~ h2) > h
 }
 
 /* ---------------------------------------------------------------------------
-   Magazine article-detail single-column layout.
+   Magazine article-detail two-column layout.
    scripts.js (decorateMagazineArticle) wraps the article body sections and the
    related-stories section into .article-layout > .article-body + .article-aside
-   on /{locale}/magazine/<slug> pages. The article body, the Download PDF card,
-   and the related-stories list all read as one centered column (body first, the
-   aside content stacked beneath it). The hero + breadcrumb stay full-width above.
+   on /{locale}/magazine/<slug> pages. On desktop the body is a readable column
+   on the left, with the Download PDF card and the related-stories list as a
+   right sidebar (matches wknd.site); on mobile it stacks. The hero + breadcrumb
+   stay full-width above the grid.
    --------------------------------------------------------------------------- */
 main .article-layout > .article-body > .section,
 main .article-layout > .article-aside > .section {
@@ -504,14 +505,16 @@ main .article-layout > .article-aside > .section {
 
 @media (width >= 900px) {
   main .article-layout {
-    display: flex;
-    flex-direction: column;
-    max-width: 840px;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 263px;
+    gap: 0 48px;
+    max-width: 1200px;
     margin: 40px auto;
     padding: 0 32px;
+    align-items: start;
   }
 
-  /* body + aside sections drop their own centering/padding — the layout owns it */
+  /* body + aside sections drop their own centering/padding — the grid owns it */
   main .article-layout > .article-body > .section > div,
   main .article-layout > .article-aside > .section > div {
     max-width: none;
@@ -519,9 +522,10 @@ main .article-layout > .article-aside > .section {
     padding: 0;
   }
 
-  /* aside content (Download card + related stories) stacks below the body */
+  /* the aside (Download card + related stories) is the sticky right sidebar */
   main .article-layout > .article-aside {
-    margin-top: 32px;
+    position: sticky;
+    top: 24px;
   }
 }
 

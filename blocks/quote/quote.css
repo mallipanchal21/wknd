@@ -45,7 +45,7 @@
    arctic-surfing) is unaffected.
    --------------------------------------------------------------------------- */
 .quote.definition {
-  background-color: var(--light-color); /* #ebebeb */
+  background-color: #ebebeb; /* source grey box — matches wknd.site .cmp-text--quote */
   padding: 32px;
   margin: 18px 0;
 }

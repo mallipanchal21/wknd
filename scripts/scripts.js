@@ -227,14 +227,21 @@ function decorateMagazineArticle(main) {
   const related = sections.find((s) => s.classList.contains('related-stories-container'));
   if (!related) return;
 
+  // the author byline: a default-content section carrying the three social links
+  // (Facebook/Twitter/Instagram — consistent across every locale). Pull it out
+  // full-width below the two-column grid, matching wknd.site.
+  const byline = sections.find((s) => decorateByline(s));
+
   const relIndex = sections.indexOf(related);
   const bcIndex = sections.findIndex((s) => s.classList.contains('breadcrumbs-container'));
   // a download ("Download PDF") section belongs in the sidebar, above related
   const download = sections.find((s) => s.classList.contains('download-container'));
   // body = sections after the breadcrumb/hero and before the related sidebar,
-  // excluding any section that belongs in the aside (download card)
+  // excluding any section that belongs in the aside (download card) or the
+  // full-width byline row
   const bodySections = sections.filter(
-    (s, i) => i > bcIndex && i < relIndex && s.children.length > 0 && s !== download,
+    (s, i) => i > bcIndex && i < relIndex && s.children.length > 0
+      && s !== download && s !== byline,
   );
   if (bodySections.length === 0) return;
 
@@ -250,6 +257,73 @@ function decorateMagazineArticle(main) {
   if (download) aside.append(download);
   aside.append(related);
   layout.append(bodyCol, aside);
+  // byline goes full-width, directly beneath the grid
+  if (byline) layout.after(byline);
+}
+
+/**
+ * Restructure the author byline default-content section (avatar + name +
+ * occupations + Facebook/Twitter/Instagram links) into the wknd.site layout:
+ * a round avatar and text on the left, a dark box of social icons on the right.
+ * Detected locale-independently by the three social links. Returns true when the
+ * section is a byline (and was decorated), false otherwise — safe to call on any
+ * section.
+ * @param {Element} section A page section element
+ * @returns {boolean} whether the section is the author byline
+ */
+function decorateByline(section) {
+  if (!section || section.classList.contains('byline')) {
+    return section && section.classList.contains('byline');
+  }
+  const wrapper = section.querySelector(':scope > .default-content-wrapper');
+  if (!wrapper) return false;
+  const links = [...wrapper.querySelectorAll('a')];
+  const socials = ['facebook', 'twitter', 'instagram'];
+  const found = socials.filter((name) => links
+    .some((a) => a.textContent.trim().toLowerCase() === name));
+  if (found.length < 3) return false;
+
+  const img = wrapper.querySelector('picture, img');
+  const name = wrapper.querySelector('h2, h3, h4');
+  // occupations = first non-empty paragraph that isn't just a social link
+  const occ = [...wrapper.querySelectorAll('p')].find(
+    (p) => p.textContent.trim() && !p.querySelector('a'),
+  );
+
+  const person = document.createElement('div');
+  person.className = 'byline-person';
+  const avatar = img ? (img.closest('p') || img) : null;
+  if (avatar) {
+    avatar.classList.add('byline-avatar');
+    person.append(avatar);
+  }
+  const text = document.createElement('div');
+  text.className = 'byline-text';
+  if (name) text.append(name);
+  if (occ) {
+    occ.classList.add('byline-occupations');
+    text.append(occ);
+  }
+  person.append(text);
+
+  const social = document.createElement('div');
+  social.className = 'byline-social';
+  links.forEach((a) => {
+    const label = a.textContent.trim().toLowerCase();
+    if (socials.includes(label)) {
+      a.className = `byline-social-link byline-${label}`;
+      a.setAttribute('aria-label', a.textContent.trim());
+      a.textContent = '';
+      social.append(a);
+      const host = a.closest('p');
+      if (host && !host.textContent.trim() && host.children.length === 0) host.remove();
+    }
+  });
+
+  wrapper.textContent = '';
+  wrapper.append(person, social);
+  section.classList.add('byline');
+  return true;
 }
 
 /**

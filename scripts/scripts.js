@@ -205,63 +205,6 @@ function decorateButtons(main) {
 }
 
 /**
- * On magazine article-detail pages, wrap the article body sections and the
- * related-stories section into a two-column grid (body on the left, the "Share
- * this Story" / related-stories sidebar on the right), matching wknd.site. The
- * hero image + breadcrumb section stays full-width above the grid. Runs only on
- * `/{locale}/magazine/<slug>` pages (never the /magazine listing) and only when
- * a related-stories block is present, so it is a no-op everywhere else.
- * @param {Element} main The (decorated) main element
- */
-function decorateMagazineArticle(main) {
-  if (main !== document.querySelector('main')) return;
-  const parts = window.location.pathname.replace(/\.html$/, '').replace(/\/$/, '').split('/').filter(Boolean);
-  let segments = parts;
-  if (segments.length >= 2 && /^[a-z]{2}$/.test(segments[0]) && /^[a-z]{2}$/.test(segments[1])) {
-    segments = segments.slice(2);
-  }
-  // article detail = magazine/<slug> (2+ segments); the listing (just "magazine") is excluded
-  if (segments[0] !== 'magazine' || segments.length < 2) return;
-
-  const sections = [...main.children].filter((el) => el.classList.contains('section'));
-  const related = sections.find((s) => s.classList.contains('related-stories-container'));
-  if (!related) return;
-
-  // the author byline: a default-content section carrying the three social links
-  // (Facebook/Twitter/Instagram — consistent across every locale). Pull it out
-  // full-width below the two-column grid, matching wknd.site.
-  const byline = sections.find((s) => decorateByline(s));
-
-  const relIndex = sections.indexOf(related);
-  const bcIndex = sections.findIndex((s) => s.classList.contains('breadcrumbs-container'));
-  // a download ("Download PDF") section belongs in the sidebar, above related
-  const download = sections.find((s) => s.classList.contains('download-container'));
-  // body = sections after the breadcrumb/hero and before the related sidebar,
-  // excluding any section that belongs in the aside (download card) or the
-  // full-width byline row
-  const bodySections = sections.filter(
-    (s, i) => i > bcIndex && i < relIndex && s.children.length > 0
-      && s !== download && s !== byline,
-  );
-  if (bodySections.length === 0) return;
-
-  const layout = document.createElement('div');
-  layout.className = 'article-layout';
-  const bodyCol = document.createElement('div');
-  bodyCol.className = 'article-body';
-  const aside = document.createElement('div');
-  aside.className = 'article-aside';
-
-  bodySections[0].before(layout);
-  bodySections.forEach((s) => bodyCol.append(s));
-  if (download) aside.append(download);
-  aside.append(related);
-  layout.append(bodyCol, aside);
-  // byline goes full-width, directly beneath the grid
-  if (byline) layout.after(byline);
-}
-
-/**
  * Restructure the author byline default-content section (avatar + name +
  * occupations + Facebook/Twitter/Instagram links) into the wknd.site layout:
  * a round avatar and text on the left, a dark box of social icons on the right.
@@ -324,6 +267,63 @@ function decorateByline(section) {
   wrapper.append(person, social);
   section.classList.add('byline');
   return true;
+}
+
+/**
+ * On magazine article-detail pages, wrap the article body sections and the
+ * related-stories section into a two-column grid (body on the left, the "Share
+ * this Story" / related-stories sidebar on the right), matching wknd.site. The
+ * hero image + breadcrumb section stays full-width above the grid. Runs only on
+ * `/{locale}/magazine/<slug>` pages (never the /magazine listing) and only when
+ * a related-stories block is present, so it is a no-op everywhere else.
+ * @param {Element} main The (decorated) main element
+ */
+function decorateMagazineArticle(main) {
+  if (main !== document.querySelector('main')) return;
+  const parts = window.location.pathname.replace(/\.html$/, '').replace(/\/$/, '').split('/').filter(Boolean);
+  let segments = parts;
+  if (segments.length >= 2 && /^[a-z]{2}$/.test(segments[0]) && /^[a-z]{2}$/.test(segments[1])) {
+    segments = segments.slice(2);
+  }
+  // article detail = magazine/<slug> (2+ segments); the listing (just "magazine") is excluded
+  if (segments[0] !== 'magazine' || segments.length < 2) return;
+
+  const sections = [...main.children].filter((el) => el.classList.contains('section'));
+  const related = sections.find((s) => s.classList.contains('related-stories-container'));
+  if (!related) return;
+
+  // the author byline: a default-content section carrying the three social links
+  // (Facebook/Twitter/Instagram — consistent across every locale). Pull it out
+  // full-width below the two-column grid, matching wknd.site.
+  const byline = sections.find((s) => decorateByline(s));
+
+  const relIndex = sections.indexOf(related);
+  const bcIndex = sections.findIndex((s) => s.classList.contains('breadcrumbs-container'));
+  // a download ("Download PDF") section belongs in the sidebar, above related
+  const download = sections.find((s) => s.classList.contains('download-container'));
+  // body = sections after the breadcrumb/hero and before the related sidebar,
+  // excluding any section that belongs in the aside (download card) or the
+  // full-width byline row
+  const bodySections = sections.filter(
+    (s, i) => i > bcIndex && i < relIndex && s.children.length > 0
+      && s !== download && s !== byline,
+  );
+  if (bodySections.length === 0) return;
+
+  const layout = document.createElement('div');
+  layout.className = 'article-layout';
+  const bodyCol = document.createElement('div');
+  bodyCol.className = 'article-body';
+  const aside = document.createElement('div');
+  aside.className = 'article-aside';
+
+  bodySections[0].before(layout);
+  bodySections.forEach((s) => bodyCol.append(s));
+  if (download) aside.append(download);
+  aside.append(related);
+  layout.append(bodyCol, aside);
+  // byline goes full-width, directly beneath the grid
+  if (byline) layout.after(byline);
 }
 
 /**

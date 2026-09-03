@@ -229,9 +229,12 @@ function decorateMagazineArticle(main) {
 
   const relIndex = sections.indexOf(related);
   const bcIndex = sections.findIndex((s) => s.classList.contains('breadcrumbs-container'));
-  // body = sections after the breadcrumb/hero and before the related sidebar
+  // a download ("Download PDF") section belongs in the sidebar, above related
+  const download = sections.find((s) => s.classList.contains('download-container'));
+  // body = sections after the breadcrumb/hero and before the related sidebar,
+  // excluding any section that belongs in the aside (download card)
   const bodySections = sections.filter(
-    (s, i) => i > bcIndex && i < relIndex && s.children.length > 0,
+    (s, i) => i > bcIndex && i < relIndex && s.children.length > 0 && s !== download,
   );
   if (bodySections.length === 0) return;
 
@@ -244,6 +247,7 @@ function decorateMagazineArticle(main) {
 
   bodySections[0].before(layout);
   bodySections.forEach((s) => bodyCol.append(s));
+  if (download) aside.append(download);
   aside.append(related);
   layout.append(bodyCol, aside);
 }

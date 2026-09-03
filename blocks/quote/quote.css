@@ -35,3 +35,41 @@
 .quote blockquote .quote-attribution cite {
   font-style: italic;
 }
+
+/* ---------------------------------------------------------------------------
+   "definition" variant — the large grey definition box used on the
+   western-australia article (source: .cmp-text--quote). Grey #ebebeb panel,
+   Asar serif 36px quotation, a short yellow accent underline, with the part-
+   of-speech ("noun") sitting below in italics. Only applies when the block
+   carries the `definition` class, so the default plain pull-quote (e.g.
+   arctic-surfing) is unaffected.
+   --------------------------------------------------------------------------- */
+.quote.definition {
+  background-color: var(--light-color); /* #ebebeb */
+  padding: 32px;
+  margin: 18px 0;
+}
+
+.quote.definition blockquote {
+  position: relative;
+  margin: 0;
+  padding: 0 0 18px;
+  font-family: var(--heading-font-family); /* Asar serif */
+  font-size: 36px;
+  line-height: 1.35;
+}
+
+.quote.definition blockquote::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 80px;
+  height: 3px;
+  background-color: var(--accent-color);
+}
+
+.quote.definition .quote-attribution {
+  margin: 12px 0 0;
+  font-style: italic;
+}

@@ -205,6 +205,50 @@ function decorateButtons(main) {
 }
 
 /**
+ * On magazine article-detail pages, wrap the article body sections and the
+ * related-stories section into a two-column grid (body on the left, the "Share
+ * this Story" / related-stories sidebar on the right), matching wknd.site. The
+ * hero image + breadcrumb section stays full-width above the grid. Runs only on
+ * `/{locale}/magazine/<slug>` pages (never the /magazine listing) and only when
+ * a related-stories block is present, so it is a no-op everywhere else.
+ * @param {Element} main The (decorated) main element
+ */
+function decorateMagazineArticle(main) {
+  if (main !== document.querySelector('main')) return;
+  const parts = window.location.pathname.replace(/\.html$/, '').replace(/\/$/, '').split('/').filter(Boolean);
+  let segments = parts;
+  if (segments.length >= 2 && /^[a-z]{2}$/.test(segments[0]) && /^[a-z]{2}$/.test(segments[1])) {
+    segments = segments.slice(2);
+  }
+  // article detail = magazine/<slug> (2+ segments); the listing (just "magazine") is excluded
+  if (segments[0] !== 'magazine' || segments.length < 2) return;
+
+  const sections = [...main.children].filter((el) => el.classList.contains('section'));
+  const related = sections.find((s) => s.classList.contains('related-stories-container'));
+  if (!related) return;
+
+  const relIndex = sections.indexOf(related);
+  const bcIndex = sections.findIndex((s) => s.classList.contains('breadcrumbs-container'));
+  // body = sections after the breadcrumb/hero and before the related sidebar
+  const bodySections = sections.filter(
+    (s, i) => i > bcIndex && i < relIndex && s.children.length > 0,
+  );
+  if (bodySections.length === 0) return;
+
+  const layout = document.createElement('div');
+  layout.className = 'article-layout';
+  const bodyCol = document.createElement('div');
+  bodyCol.className = 'article-body';
+  const aside = document.createElement('div');
+  aside.className = 'article-aside';
+
+  bodySections[0].before(layout);
+  bodySections.forEach((s) => bodyCol.append(s));
+  aside.append(related);
+  layout.append(bodyCol, aside);
+}
+
+/**
  * Decorates the main element.
  * @param {Element} main The main element
  */
@@ -215,6 +259,7 @@ export function decorateMain(main) {
   decorateSections(main);
   decorateBlocks(main);
   decorateButtons(main);
+  decorateMagazineArticle(main);
 }
 
 /**

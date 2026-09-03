@@ -484,3 +484,42 @@ main .default-content-wrapper:has(picture):has(h2 ~ h2) > h2:not(:first-child)::
     grid-row: 10;
   }
 }
+
+/* ---------------------------------------------------------------------------
+   Magazine article-detail two-column layout.
+   scripts.js (decorateMagazineArticle) wraps the article body sections and the
+   related-stories section into .article-layout > .article-body + .article-aside
+   on /{locale}/magazine/<slug> pages. On desktop the body is a readable column
+   with the "Share this Story" / related-stories list as a right sidebar
+   (matches wknd.site); on mobile it stacks. The hero + breadcrumb stay
+   full-width above the grid.
+   --------------------------------------------------------------------------- */
+main .article-layout > .article-body > .section,
+main .article-layout > .article-aside > .section {
+  margin: 0;
+}
+
+@media (width >= 900px) {
+  main .article-layout {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 263px;
+    gap: 0 48px;
+    max-width: 1200px;
+    margin: 40px auto;
+    padding: 0 32px;
+    align-items: start;
+  }
+
+  /* body + aside sections drop their own centering/padding — the grid owns it */
+  main .article-layout > .article-body > .section > div,
+  main .article-layout > .article-aside > .section > div {
+    max-width: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  main .article-layout > .article-aside {
+    position: sticky;
+    top: 24px;
+  }
+}

@@ -109,6 +109,141 @@ function toggleMenu(nav, navSections, forceExpanded = null) {
 }
 
 /**
+ * Determine the locale prefix ("/us/en") from the current path, matching the
+ * /{country}/{lang}/... URL pattern. Returns '' at the site root so the search
+ * falls back to the top-level /query-index.json.
+ * @returns {string} the locale prefix, e.g. "/us/en", or ''
+ */
+function getLocalePrefix() {
+  const seg = window.location.pathname.split('/').filter(Boolean);
+  if (seg.length >= 2 && /^[a-z]{2}$/.test(seg[0]) && /^[a-z]{2}$/.test(seg[1])) {
+    return `/${seg[0]}/${seg[1]}`;
+  }
+  return '';
+}
+
+// per-language UI strings for the search field (fallback: English)
+const SEARCH_I18N = {
+  en: { placeholder: 'Search', empty: 'No results found' },
+  es: { placeholder: 'Buscar', empty: 'No se encontraron resultados' },
+  fr: { placeholder: 'Rechercher', empty: 'Aucun résultat' },
+  de: { placeholder: 'Suchen', empty: 'Keine Ergebnisse gefunden' },
+  it: { placeholder: 'Cerca', empty: 'Nessun risultato' },
+};
+
+/**
+ * Turn the nav's `:search:` placeholder box into a working search field that
+ * queries the current locale's query-index.json and shows matching pages in a
+ * dropdown. The index is fetched lazily (on first focus) and cached.
+ * @param {Element} navTools The .nav-tools section
+ */
+function decorateSearch(navTools) {
+  const box = navTools.querySelector('.default-content-wrapper > p') || navTools;
+  const icon = box.querySelector('.icon-search');
+  const prefix = getLocalePrefix();
+  const lang = (prefix.split('/')[2] || 'en').toLowerCase();
+  const t = SEARCH_I18N[lang] || SEARCH_I18N.en;
+
+  // build the field: keep the search icon, add an input and a results panel
+  box.textContent = '';
+  if (icon) box.append(icon);
+
+  const form = document.createElement('form');
+  form.className = 'nav-search';
+  form.setAttribute('role', 'search');
+  form.action = '';
+
+  const input = document.createElement('input');
+  input.type = 'search';
+  input.className = 'nav-search-input';
+  input.placeholder = t.placeholder;
+  input.setAttribute('aria-label', t.placeholder);
+  input.autocomplete = 'off';
+
+  const results = document.createElement('ul');
+  results.className = 'nav-search-results';
+  results.hidden = true;
+
+  form.append(input, results);
+  box.append(form);
+
+  let index = null;
+  let loading = null;
+
+  async function loadIndex() {
+    if (index) return index;
+    if (!loading) {
+      const url = `${prefix}/query-index.json`;
+      loading = fetch(url)
+        .then((resp) => (resp.ok ? resp.json() : { data: [] }))
+        .then((json) => { index = json.data || []; return index; })
+        .catch(() => { index = []; return index; });
+    }
+    return loading;
+  }
+
+  function render(matches) {
+    results.textContent = '';
+    if (!matches.length) {
+      const li = document.createElement('li');
+      li.className = 'nav-search-empty';
+      li.textContent = t.empty;
+      results.append(li);
+      results.hidden = false;
+      return;
+    }
+    matches.slice(0, 8).forEach((row) => {
+      const li = document.createElement('li');
+      const a = document.createElement('a');
+      a.href = row.path;
+      const title = document.createElement('span');
+      title.className = 'nav-search-result-title';
+      title.textContent = row.title || row.path;
+      a.append(title);
+      if (row.description) {
+        const desc = document.createElement('span');
+        desc.className = 'nav-search-result-desc';
+        desc.textContent = row.description;
+        a.append(desc);
+      }
+      li.append(a);
+      results.append(li);
+    });
+    results.hidden = false;
+  }
+
+  async function search() {
+    const q = input.value.trim().toLowerCase();
+    if (!q) { results.hidden = true; results.textContent = ''; return; }
+    const data = await loadIndex();
+    const matches = data.filter((row) => {
+      const hay = `${row.title || ''} ${row.description || ''} ${row.path || ''}`.toLowerCase();
+      return hay.includes(q);
+    });
+    render(matches);
+  }
+
+  let debounce;
+  input.addEventListener('input', () => {
+    clearTimeout(debounce);
+    debounce = setTimeout(search, 150);
+  });
+  input.addEventListener('focus', loadIndex);
+  form.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const first = results.querySelector('a');
+    if (first) window.location.assign(first.href);
+  });
+  // close the results on outside click or Escape
+  document.addEventListener('click', (e) => {
+    if (!form.contains(e.target)) { results.hidden = true; }
+  });
+  input.addEventListener('keydown', (e) => {
+    if (e.code === 'Escape') { results.hidden = true; input.blur(); }
+  });
+}
+
+/**
  * loads and decorates the header, mainly the nav
  * @param {Element} block The header block element
  */
@@ -136,6 +271,10 @@ export default async function decorate(block) {
     brandLink.className = '';
     brandLink.closest('.button-container').className = '';
   }
+
+  // turn the search placeholder into a working locale-aware search field
+  const navTools = nav.querySelector('.nav-tools');
+  if (navTools) decorateSearch(navTools);
 
   const navSections = nav.querySelector('.nav-sections');
   if (navSections) {

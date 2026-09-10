@@ -2,14 +2,11 @@
   "type": "da",
   "sites": {
     "wknd": {
+      "libraryUrl": "https://main--sta-boilerplate--aemdemos.aem.page/tools/sidekick/library.json",
       "previewOrg": "mallipanchal21",
       "previewSite": "wknd",
-      "contentHostUrl": "https://content.da.live/mallipanchal21/wknd/",
-      "libraryUrl": "https://main--sta-boilerplate--aemdemos.aem.page/tools/sidekick/library.json"
+      "contentHostUrl": "https://content.da.live/mallipanchal21/wknd/"
     }
   },
-  "features": [
-    "site-planning"
-  ],
   "pluginRoot": "/home/node/.excat-marketplaces/excat-marketplace/excat"
 }

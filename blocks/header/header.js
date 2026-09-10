@@ -243,6 +243,61 @@ function decorateSearch(navTools) {
   });
 }
 
+// nav items are never built for these locale-relative page names
+const NAV_EXCLUDE = new Set(['nav', 'footer']);
+
+/**
+ * Build the nav section links dynamically from the current locale's
+ * query-index.json, using every direct child page of the locale root
+ * (e.g. /us/en/magazine, /us/en/adventures) except the `nav` and `footer`
+ * pages and the locale home itself. On success the authored list is replaced;
+ * on failure (no index, no children) the authored markup is left untouched.
+ * @param {Element} navSections The .nav-sections element
+ * @param {string} prefix The locale prefix, e.g. "/us/en"
+ */
+async function buildNavSections(navSections, prefix) {
+  if (!prefix) return;
+  let data;
+  try {
+    const resp = await fetch(`${prefix}/query-index.json`);
+    if (!resp.ok) return;
+    data = (await resp.json()).data || [];
+  } catch (e) {
+    return;
+  }
+
+  // keep only the locale's direct child pages, dropping nav/footer/home
+  const children = data.filter((row) => {
+    const path = (row.path || '').replace(/\.html$/, '');
+    if (!path.startsWith(`${prefix}/`)) return false;
+    const rel = path.slice(prefix.length + 1).split('/').filter(Boolean);
+    return rel.length === 1 && !NAV_EXCLUDE.has(rel[0]);
+  });
+  if (!children.length) return;
+
+  // stable, predictable ordering by link label
+  children.sort((a, b) => (a.title || a.path).localeCompare(b.title || b.path));
+
+  const ul = document.createElement('ul');
+  children.forEach((row) => {
+    const li = document.createElement('li');
+    const a = document.createElement('a');
+    a.href = row.path.replace(/\.html$/, '');
+    a.textContent = row.title || a.href;
+    li.append(a);
+    ul.append(li);
+  });
+
+  let wrapper = navSections.querySelector('.default-content-wrapper');
+  if (!wrapper) {
+    wrapper = document.createElement('div');
+    wrapper.className = 'default-content-wrapper';
+    navSections.append(wrapper);
+  }
+  wrapper.textContent = '';
+  wrapper.append(ul);
+}
+
 /**
  * loads and decorates the header, mainly the nav
  * @param {Element} block The header block element
@@ -278,6 +333,9 @@ export default async function decorate(block) {
 
   const navSections = nav.querySelector('.nav-sections');
   if (navSections) {
+    // build the nav items from the current locale's child pages (falls back to
+    // the authored list if the query index is unavailable)
+    await buildNavSections(navSections, getLocalePrefix());
     // highlight the nav link matching the current page (WKND yellow active state)
     const currentPath = window.location.pathname.replace(/\.html$/, '').replace(/\/$/, '');
     navSections.querySelectorAll(':scope a').forEach((a) => {

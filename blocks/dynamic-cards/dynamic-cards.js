@@ -20,7 +20,8 @@ function getLocalePrefix() {
 /**
  * Read the block's authored configuration. Authors provide the source folder
  * ("magazine" or "adventures", or a full path like "/us/en/magazine") and an
- * optional numeric limit, one value per cell.
+ * optional limit, one value per cell. The limit may be a number, or "all"
+ * (case-insensitive) to list every matching page.
  * @param {Element} block The dynamic-cards block element
  * @returns {{folder: string, limit: number}}
  */
@@ -32,6 +33,7 @@ function readConfig(block) {
       const text = cell.textContent.trim();
       if (!text) return;
       if (/^\d+$/.test(text)) limit = parseInt(text, 10);
+      else if (/^all$/i.test(text)) limit = Infinity;
       else if (!folder) folder = text;
     });
   });
